@@ -1,0 +1,40 @@
+[package]
+name = "carthage_rust_sdk"
+description = "Carthage Software Development Kit for Rust"
+version = "0.0.0"
+authors = ["Saif Eddin Gmati <azjezz@protonmail.com>"]
+edition = "2021"
+readme = "README.md"
+repository = "https://github.com/carthage-software/rust-sdk"
+documentation = "https://docs.rs/carthage_rust_sdk"
+homepage = "https://github.com/carthage-software/rust-sdk"
+categories = ["development-tools", "network-programming", "system-programming"]
+exclude = ["/.github/*", "/examples/*", "/generator/*"]
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+chrono = { version = "0.4", features = ["serde"] }
+progenitor-client = { git = "https://github.com/oxidecomputer/progenitor" }
+reqwest = { version = "0.11.18", features = ["json", "stream"] }
+base64 = "0.21"
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.4", features = ["serde", "v4"] }
+
+[dev-dependencies]
+tokio = { "version" = "1.0", features = ["full"] }
+prettyplease = "0.2.10"
+progenitor = { git = "https://github.com/oxidecomputer/progenitor" }
+syn = { version = "2.0", features = ["full", "visit-mut"] }
+serde_json = "1.0"
+quote = "1.0"
+proc-macro2 = "1.0"
+
+[[example]]
+name = "ping"
+path = "examples/ping.rs"
+
+[[example]]
+name = "logs"
+path = "examples/logs.rs"
