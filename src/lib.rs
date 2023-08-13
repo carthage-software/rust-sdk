@@ -1,6 +1,6 @@
-pub use progenitor_client::{ByteStream, Error, ResponseValue};
 #[allow(unused_imports)]
 use progenitor_client::{encode_path, RequestBuilderExt};
+pub use progenitor_client::{ByteStream, Error, ResponseValue};
 #[allow(unused_imports)]
 use reqwest::header::{HeaderMap, HeaderValue};
 pub mod types {
@@ -30,8 +30,7 @@ pub mod types {
         pub entries: Vec<LogManagementCollectBodyCollectLogsItemEntriesItem>,
         pub log: LogManagementCollectBodyCollectLogsItemLog,
     }
-    impl From<&LogManagementCollectBodyCollectLogsItem>
-    for LogManagementCollectBodyCollectLogsItem {
+    impl From<&LogManagementCollectBodyCollectLogsItem> for LogManagementCollectBodyCollectLogsItem {
         fn from(value: &LogManagementCollectBodyCollectLogsItem) -> Self {
             value.clone()
         }
@@ -47,7 +46,8 @@ pub mod types {
         pub tags: Vec<String>,
     }
     impl From<&LogManagementCollectBodyCollectLogsItemEntriesItem>
-    for LogManagementCollectBodyCollectLogsItemEntriesItem {
+        for LogManagementCollectBodyCollectLogsItemEntriesItem
+    {
         fn from(value: &LogManagementCollectBodyCollectLogsItemEntriesItem) -> Self {
             value.clone()
         }
@@ -62,17 +62,14 @@ pub mod types {
         }
     }
     impl From<LogManagementCollectBodyCollectLogsItemEntriesItemSource> for String {
-        fn from(
-            value: LogManagementCollectBodyCollectLogsItemEntriesItemSource,
-        ) -> Self {
+        fn from(value: LogManagementCollectBodyCollectLogsItemEntriesItemSource) -> Self {
             value.0
         }
     }
     impl From<&LogManagementCollectBodyCollectLogsItemEntriesItemSource>
-    for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
-        fn from(
-            value: &LogManagementCollectBodyCollectLogsItemEntriesItemSource,
-        ) -> Self {
+        for LogManagementCollectBodyCollectLogsItemEntriesItemSource
+    {
+        fn from(value: &LogManagementCollectBodyCollectLogsItemEntriesItemSource) -> Self {
             value.clone()
         }
     }
@@ -88,38 +85,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<&str> for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<&String> for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<String> for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectBodyCollectLogsItemEntriesItemSource {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -132,7 +123,8 @@ pub mod types {
         pub template: LogManagementCollectBodyCollectLogsItemLogTemplate,
     }
     impl From<&LogManagementCollectBodyCollectLogsItemLog>
-    for LogManagementCollectBodyCollectLogsItemLog {
+        for LogManagementCollectBodyCollectLogsItemLog
+    {
         fn from(value: &LogManagementCollectBodyCollectLogsItemLog) -> Self {
             value.clone()
         }
@@ -152,7 +144,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectBodyCollectLogsItemLogLevel>
-    for LogManagementCollectBodyCollectLogsItemLogLevel {
+        for LogManagementCollectBodyCollectLogsItemLogLevel
+    {
         fn from(value: &LogManagementCollectBodyCollectLogsItemLogLevel) -> Self {
             value.clone()
         }
@@ -160,8 +153,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementCollectBodyCollectLogsItemLogLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -169,14 +164,13 @@ pub mod types {
             }
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectBodyCollectLogsItemLogLevel {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectBodyCollectLogsItemLogLevel {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -194,7 +188,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectBodyCollectLogsItemLogNamespace>
-    for LogManagementCollectBodyCollectLogsItemLogNamespace {
+        for LogManagementCollectBodyCollectLogsItemLogNamespace
+    {
         fn from(value: &LogManagementCollectBodyCollectLogsItemLogNamespace) -> Self {
             value.clone()
         }
@@ -211,38 +206,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementCollectBodyCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<&str> for LogManagementCollectBodyCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectBodyCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<&String> for LogManagementCollectBodyCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectBodyCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<String> for LogManagementCollectBodyCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectBodyCollectLogsItemLogNamespace {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectBodyCollectLogsItemLogNamespace {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -260,7 +249,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectBodyCollectLogsItemLogTemplate>
-    for LogManagementCollectBodyCollectLogsItemLogTemplate {
+        for LogManagementCollectBodyCollectLogsItemLogTemplate
+    {
         fn from(value: &LogManagementCollectBodyCollectLogsItemLogTemplate) -> Self {
             value.clone()
         }
@@ -277,38 +267,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementCollectBodyCollectLogsItemLogTemplate {
+    impl std::convert::TryFrom<&str> for LogManagementCollectBodyCollectLogsItemLogTemplate {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectBodyCollectLogsItemLogTemplate {
+    impl std::convert::TryFrom<&String> for LogManagementCollectBodyCollectLogsItemLogTemplate {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectBodyCollectLogsItemLogTemplate {
+    impl std::convert::TryFrom<String> for LogManagementCollectBodyCollectLogsItemLogTemplate {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectBodyCollectLogsItemLogTemplate {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectBodyCollectLogsItemLogTemplate {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -316,8 +300,7 @@ pub mod types {
         pub entries: Vec<LogManagementCollectCollectLogsItemEntriesItem>,
         pub log: LogManagementCollectCollectLogsItemLog,
     }
-    impl From<&LogManagementCollectCollectLogsItem>
-    for LogManagementCollectCollectLogsItem {
+    impl From<&LogManagementCollectCollectLogsItem> for LogManagementCollectCollectLogsItem {
         fn from(value: &LogManagementCollectCollectLogsItem) -> Self {
             value.clone()
         }
@@ -333,7 +316,8 @@ pub mod types {
         pub tags: Vec<String>,
     }
     impl From<&LogManagementCollectCollectLogsItemEntriesItem>
-    for LogManagementCollectCollectLogsItemEntriesItem {
+        for LogManagementCollectCollectLogsItemEntriesItem
+    {
         fn from(value: &LogManagementCollectCollectLogsItemEntriesItem) -> Self {
             value.clone()
         }
@@ -353,7 +337,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectCollectLogsItemEntriesItemSource>
-    for LogManagementCollectCollectLogsItemEntriesItemSource {
+        for LogManagementCollectCollectLogsItemEntriesItemSource
+    {
         fn from(value: &LogManagementCollectCollectLogsItemEntriesItemSource) -> Self {
             value.clone()
         }
@@ -370,38 +355,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementCollectCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<&str> for LogManagementCollectCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<&String> for LogManagementCollectCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectCollectLogsItemEntriesItemSource {
+    impl std::convert::TryFrom<String> for LogManagementCollectCollectLogsItemEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectCollectLogsItemEntriesItemSource {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectCollectLogsItemEntriesItemSource {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -413,8 +392,7 @@ pub mod types {
         ///The template used for formatting the log message.
         pub template: LogManagementCollectCollectLogsItemLogTemplate,
     }
-    impl From<&LogManagementCollectCollectLogsItemLog>
-    for LogManagementCollectCollectLogsItemLog {
+    impl From<&LogManagementCollectCollectLogsItemLog> for LogManagementCollectCollectLogsItemLog {
         fn from(value: &LogManagementCollectCollectLogsItemLog) -> Self {
             value.clone()
         }
@@ -434,7 +412,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectCollectLogsItemLogLevel>
-    for LogManagementCollectCollectLogsItemLogLevel {
+        for LogManagementCollectCollectLogsItemLogLevel
+    {
         fn from(value: &LogManagementCollectCollectLogsItemLogLevel) -> Self {
             value.clone()
         }
@@ -442,8 +421,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementCollectCollectLogsItemLogLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -457,7 +438,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -475,7 +456,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectCollectLogsItemLogNamespace>
-    for LogManagementCollectCollectLogsItemLogNamespace {
+        for LogManagementCollectCollectLogsItemLogNamespace
+    {
         fn from(value: &LogManagementCollectCollectLogsItemLogNamespace) -> Self {
             value.clone()
         }
@@ -492,38 +474,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementCollectCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<&str> for LogManagementCollectCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<&String> for LogManagementCollectCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectCollectLogsItemLogNamespace {
+    impl std::convert::TryFrom<String> for LogManagementCollectCollectLogsItemLogNamespace {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectCollectLogsItemLogNamespace {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectCollectLogsItemLogNamespace {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -541,7 +517,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectCollectLogsItemLogTemplate>
-    for LogManagementCollectCollectLogsItemLogTemplate {
+        for LogManagementCollectCollectLogsItemLogTemplate
+    {
         fn from(value: &LogManagementCollectCollectLogsItemLogTemplate) -> Self {
             value.clone()
         }
@@ -564,31 +541,26 @@ pub mod types {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectCollectLogsItemLogTemplate {
+    impl std::convert::TryFrom<&String> for LogManagementCollectCollectLogsItemLogTemplate {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementCollectCollectLogsItemLogTemplate {
+    impl std::convert::TryFrom<String> for LogManagementCollectCollectLogsItemLogTemplate {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementCollectCollectLogsItemLogTemplate {
+    impl<'de> serde::Deserialize<'de> for LogManagementCollectCollectLogsItemLogTemplate {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -611,8 +583,7 @@ pub mod types {
         pub source: LogManagementCollectLogBodyEntriesItemSource,
         pub tags: Vec<String>,
     }
-    impl From<&LogManagementCollectLogBodyEntriesItem>
-    for LogManagementCollectLogBodyEntriesItem {
+    impl From<&LogManagementCollectLogBodyEntriesItem> for LogManagementCollectLogBodyEntriesItem {
         fn from(value: &LogManagementCollectLogBodyEntriesItem) -> Self {
             value.clone()
         }
@@ -632,7 +603,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCollectLogBodyEntriesItemSource>
-    for LogManagementCollectLogBodyEntriesItemSource {
+        for LogManagementCollectLogBodyEntriesItemSource
+    {
         fn from(value: &LogManagementCollectLogBodyEntriesItemSource) -> Self {
             value.clone()
         }
@@ -655,8 +627,7 @@ pub mod types {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementCollectLogBodyEntriesItemSource {
+    impl std::convert::TryFrom<&String> for LogManagementCollectLogBodyEntriesItemSource {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
@@ -675,9 +646,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -708,8 +677,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCollectLogBodyLogLevel>
-    for LogManagementCollectLogBodyLogLevel {
+    impl From<&LogManagementCollectLogBodyLogLevel> for LogManagementCollectLogBodyLogLevel {
         fn from(value: &LogManagementCollectLogBodyLogLevel) -> Self {
             value.clone()
         }
@@ -717,8 +685,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementCollectLogBodyLogLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -732,7 +702,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -749,8 +719,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCollectLogBodyLogNamespace>
-    for LogManagementCollectLogBodyLogNamespace {
+    impl From<&LogManagementCollectLogBodyLogNamespace> for LogManagementCollectLogBodyLogNamespace {
         fn from(value: &LogManagementCollectLogBodyLogNamespace) -> Self {
             value.clone()
         }
@@ -792,9 +761,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -811,8 +778,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCollectLogBodyLogTemplate>
-    for LogManagementCollectLogBodyLogTemplate {
+    impl From<&LogManagementCollectLogBodyLogTemplate> for LogManagementCollectLogBodyLogTemplate {
         fn from(value: &LogManagementCollectLogBodyLogTemplate) -> Self {
             value.clone()
         }
@@ -854,9 +820,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -895,8 +859,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementCreateLogBodyLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -910,7 +876,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -927,8 +893,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogBodyNamespace>
-    for LogManagementCreateLogBodyNamespace {
+    impl From<&LogManagementCreateLogBodyNamespace> for LogManagementCreateLogBodyNamespace {
         fn from(value: &LogManagementCreateLogBodyNamespace) -> Self {
             value.clone()
         }
@@ -970,9 +935,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -989,8 +952,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogBodyTemplate>
-    for LogManagementCreateLogBodyTemplate {
+    impl From<&LogManagementCreateLogBodyTemplate> for LogManagementCreateLogBodyTemplate {
         fn from(value: &LogManagementCreateLogBodyTemplate) -> Self {
             value.clone()
         }
@@ -1032,9 +994,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -1068,8 +1028,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogEntryBodySource>
-    for LogManagementCreateLogEntryBodySource {
+    impl From<&LogManagementCreateLogEntryBodySource> for LogManagementCreateLogEntryBodySource {
         fn from(value: &LogManagementCreateLogEntryBodySource) -> Self {
             value.clone()
         }
@@ -1111,9 +1070,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Resource representing a log entry.
@@ -1139,8 +1096,7 @@ pub mod types {
         ///Timestamp when the log entry was last updated.
         pub updated_at: chrono::DateTime<chrono::offset::Utc>,
     }
-    impl From<&LogManagementCreateLogEntryResponse>
-    for LogManagementCreateLogEntryResponse {
+    impl From<&LogManagementCreateLogEntryResponse> for LogManagementCreateLogEntryResponse {
         fn from(value: &LogManagementCreateLogEntryResponse) -> Self {
             value.clone()
         }
@@ -1160,7 +1116,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCreateLogEntryResponseSource>
-    for LogManagementCreateLogEntryResponseSource {
+        for LogManagementCreateLogEntryResponseSource
+    {
         fn from(value: &LogManagementCreateLogEntryResponseSource) -> Self {
             value.clone()
         }
@@ -1199,9 +1156,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
@@ -1218,7 +1173,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementCreateLogEntryResponseTagsItem>
-    for LogManagementCreateLogEntryResponseTagsItem {
+        for LogManagementCreateLogEntryResponseTagsItem
+    {
         fn from(value: &LogManagementCreateLogEntryResponseTagsItem) -> Self {
             value.clone()
         }
@@ -1257,30 +1213,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementCreateLogEntryResponseType {
         #[serde(rename = "log_entry")]
         LogEntry,
     }
-    impl From<&LogManagementCreateLogEntryResponseType>
-    for LogManagementCreateLogEntryResponseType {
+    impl From<&LogManagementCreateLogEntryResponseType> for LogManagementCreateLogEntryResponseType {
         fn from(value: &LogManagementCreateLogEntryResponseType) -> Self {
             value.clone()
         }
@@ -1356,25 +1298,13 @@ pub mod types {
         ///Value of the log level.
         pub value: LogManagementCreateLogResponseLevelValue,
     }
-    impl From<&LogManagementCreateLogResponseLevel>
-    for LogManagementCreateLogResponseLevel {
+    impl From<&LogManagementCreateLogResponseLevel> for LogManagementCreateLogResponseLevel {
         fn from(value: &LogManagementCreateLogResponseLevel) -> Self {
             value.clone()
         }
     }
     ///Name of the log level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementCreateLogResponseLevelName {
         Debug,
         Info,
@@ -1385,8 +1315,7 @@ pub mod types {
         Alert,
         Emergency,
     }
-    impl From<&LogManagementCreateLogResponseLevelName>
-    for LogManagementCreateLogResponseLevelName {
+    impl From<&LogManagementCreateLogResponseLevelName> for LogManagementCreateLogResponseLevelName {
         fn from(value: &LogManagementCreateLogResponseLevelName) -> Self {
             value.clone()
         }
@@ -1453,8 +1382,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogResponseLevelValue>
-    for LogManagementCreateLogResponseLevelValue {
+    impl From<&LogManagementCreateLogResponseLevelValue> for LogManagementCreateLogResponseLevelValue {
         fn from(value: &LogManagementCreateLogResponseLevelValue) -> Self {
             value.clone()
         }
@@ -1462,8 +1390,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementCreateLogResponseLevelValue {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -1477,7 +1407,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace of the log.
@@ -1494,8 +1424,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogResponseNamespace>
-    for LogManagementCreateLogResponseNamespace {
+    impl From<&LogManagementCreateLogResponseNamespace> for LogManagementCreateLogResponseNamespace {
         fn from(value: &LogManagementCreateLogResponseNamespace) -> Self {
             value.clone()
         }
@@ -1534,9 +1463,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template for formatting the message.
@@ -1553,8 +1480,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementCreateLogResponseTemplate>
-    for LogManagementCreateLogResponseTemplate {
+    impl From<&LogManagementCreateLogResponseTemplate> for LogManagementCreateLogResponseTemplate {
         fn from(value: &LogManagementCreateLogResponseTemplate) -> Self {
             value.clone()
         }
@@ -1593,30 +1519,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementCreateLogResponseType {
         #[serde(rename = "log")]
         Log,
     }
-    impl From<&LogManagementCreateLogResponseType>
-    for LogManagementCreateLogResponseType {
+    impl From<&LogManagementCreateLogResponseType> for LogManagementCreateLogResponseType {
         fn from(value: &LogManagementCreateLogResponseType) -> Self {
             value.clone()
         }
@@ -1668,8 +1580,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogCollectionLevelsItem>
-    for LogManagementGetLogCollectionLevelsItem {
+    impl From<&LogManagementGetLogCollectionLevelsItem> for LogManagementGetLogCollectionLevelsItem {
         fn from(value: &LogManagementGetLogCollectionLevelsItem) -> Self {
             value.clone()
         }
@@ -1677,8 +1588,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementGetLogCollectionLevelsItem {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -1692,30 +1605,18 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The order of the logs.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogCollectionOrder {
         #[serde(rename = "ASC")]
         Asc,
         #[serde(rename = "DESC")]
         Desc,
     }
-    impl From<&LogManagementGetLogCollectionOrder>
-    for LogManagementGetLogCollectionOrder {
+    impl From<&LogManagementGetLogCollectionOrder> for LogManagementGetLogCollectionOrder {
         fn from(value: &LogManagementGetLogCollectionOrder) -> Self {
             value.clone()
         }
@@ -1786,8 +1687,7 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementGetLogCollectionResponseType,
     }
-    impl From<&LogManagementGetLogCollectionResponse>
-    for LogManagementGetLogCollectionResponse {
+    impl From<&LogManagementGetLogCollectionResponse> for LogManagementGetLogCollectionResponse {
         fn from(value: &LogManagementGetLogCollectionResponse) -> Self {
             value.clone()
         }
@@ -1817,7 +1717,8 @@ pub mod types {
         pub updated_at: chrono::DateTime<chrono::offset::Utc>,
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItem>
-    for LogManagementGetLogCollectionResponseItemsItem {
+        for LogManagementGetLogCollectionResponseItemsItem
+    {
         fn from(value: &LogManagementGetLogCollectionResponseItemsItem) -> Self {
             value.clone()
         }
@@ -1831,24 +1732,14 @@ pub mod types {
         pub value: LogManagementGetLogCollectionResponseItemsItemLevelValue,
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemLevel>
-    for LogManagementGetLogCollectionResponseItemsItemLevel {
+        for LogManagementGetLogCollectionResponseItemsItemLevel
+    {
         fn from(value: &LogManagementGetLogCollectionResponseItemsItemLevel) -> Self {
             value.clone()
         }
     }
     ///Name of the log level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogCollectionResponseItemsItemLevelName {
         Debug,
         Info,
@@ -1860,10 +1751,9 @@ pub mod types {
         Emergency,
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemLevelName>
-    for LogManagementGetLogCollectionResponseItemsItemLevelName {
-        fn from(
-            value: &LogManagementGetLogCollectionResponseItemsItemLevelName,
-        ) -> Self {
+        for LogManagementGetLogCollectionResponseItemsItemLevelName
+    {
+        fn from(value: &LogManagementGetLogCollectionResponseItemsItemLevelName) -> Self {
             value.clone()
         }
     }
@@ -1897,22 +1787,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogCollectionResponseItemsItemLevelName {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogCollectionResponseItemsItemLevelName {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogCollectionResponseItemsItemLevelName {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogCollectionResponseItemsItemLevelName {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogCollectionResponseItemsItemLevelName {
+    impl std::convert::TryFrom<String> for LogManagementGetLogCollectionResponseItemsItemLevelName {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -1928,26 +1815,24 @@ pub mod types {
         }
     }
     impl From<LogManagementGetLogCollectionResponseItemsItemLevelValue> for i64 {
-        fn from(
-            value: LogManagementGetLogCollectionResponseItemsItemLevelValue,
-        ) -> Self {
+        fn from(value: LogManagementGetLogCollectionResponseItemsItemLevelValue) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemLevelValue>
-    for LogManagementGetLogCollectionResponseItemsItemLevelValue {
-        fn from(
-            value: &LogManagementGetLogCollectionResponseItemsItemLevelValue,
-        ) -> Self {
+        for LogManagementGetLogCollectionResponseItemsItemLevelValue
+    {
+        fn from(value: &LogManagementGetLogCollectionResponseItemsItemLevelValue) -> Self {
             value.clone()
         }
     }
-    impl std::convert::TryFrom<i64>
-    for LogManagementGetLogCollectionResponseItemsItemLevelValue {
+    impl std::convert::TryFrom<i64> for LogManagementGetLogCollectionResponseItemsItemLevelValue {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -1955,14 +1840,13 @@ pub mod types {
             }
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogCollectionResponseItemsItemLevelValue {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogCollectionResponseItemsItemLevelValue {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace of the log.
@@ -1980,10 +1864,9 @@ pub mod types {
         }
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemNamespace>
-    for LogManagementGetLogCollectionResponseItemsItemNamespace {
-        fn from(
-            value: &LogManagementGetLogCollectionResponseItemsItemNamespace,
-        ) -> Self {
+        for LogManagementGetLogCollectionResponseItemsItemNamespace
+    {
+        fn from(value: &LogManagementGetLogCollectionResponseItemsItemNamespace) -> Self {
             value.clone()
         }
     }
@@ -1996,38 +1879,32 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogCollectionResponseItemsItemNamespace {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogCollectionResponseItemsItemNamespace {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogCollectionResponseItemsItemNamespace {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogCollectionResponseItemsItemNamespace {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogCollectionResponseItemsItemNamespace {
+    impl std::convert::TryFrom<String> for LogManagementGetLogCollectionResponseItemsItemNamespace {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogCollectionResponseItemsItemNamespace {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogCollectionResponseItemsItemNamespace {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template for formatting the message.
@@ -2045,7 +1922,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemTemplate>
-    for LogManagementGetLogCollectionResponseItemsItemTemplate {
+        for LogManagementGetLogCollectionResponseItemsItemTemplate
+    {
         fn from(value: &LogManagementGetLogCollectionResponseItemsItemTemplate) -> Self {
             value.clone()
         }
@@ -2059,59 +1937,43 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogCollectionResponseItemsItemTemplate {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogCollectionResponseItemsItemTemplate {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogCollectionResponseItemsItemTemplate {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogCollectionResponseItemsItemTemplate {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogCollectionResponseItemsItemTemplate {
+    impl std::convert::TryFrom<String> for LogManagementGetLogCollectionResponseItemsItemTemplate {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogCollectionResponseItemsItemTemplate {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogCollectionResponseItemsItemTemplate {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogCollectionResponseItemsItemType {
         #[serde(rename = "log")]
         Log,
     }
     impl From<&LogManagementGetLogCollectionResponseItemsItemType>
-    for LogManagementGetLogCollectionResponseItemsItemType {
+        for LogManagementGetLogCollectionResponseItemsItemType
+    {
         fn from(value: &LogManagementGetLogCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
@@ -2132,46 +1994,33 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogCollectionResponseType {
         #[serde(rename = "paginated_collection")]
         PaginatedCollection,
     }
     impl From<&LogManagementGetLogCollectionResponseType>
-    for LogManagementGetLogCollectionResponseType {
+        for LogManagementGetLogCollectionResponseType
+    {
         fn from(value: &LogManagementGetLogCollectionResponseType) -> Self {
             value.clone()
         }
@@ -2211,18 +2060,7 @@ pub mod types {
         }
     }
     ///The field to sort the logs by.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogCollectionSortBy {
         #[serde(rename = "createdAt")]
         CreatedAt,
@@ -2235,8 +2073,7 @@ pub mod types {
         #[serde(rename = "level")]
         Level,
     }
-    impl From<&LogManagementGetLogCollectionSortBy>
-    for LogManagementGetLogCollectionSortBy {
+    impl From<&LogManagementGetLogCollectionSortBy> for LogManagementGetLogCollectionSortBy {
         fn from(value: &LogManagementGetLogCollectionSortBy) -> Self {
             value.clone()
         }
@@ -2289,26 +2126,14 @@ pub mod types {
         }
     }
     ///The order of the log entries.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryCollectionOrder {
         #[serde(rename = "ASC")]
         Asc,
         #[serde(rename = "DESC")]
         Desc,
     }
-    impl From<&LogManagementGetLogEntryCollectionOrder>
-    for LogManagementGetLogEntryCollectionOrder {
+    impl From<&LogManagementGetLogEntryCollectionOrder> for LogManagementGetLogEntryCollectionOrder {
         fn from(value: &LogManagementGetLogEntryCollectionOrder) -> Self {
             value.clone()
         }
@@ -2380,7 +2205,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntryCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntryCollectionResponse>
-    for LogManagementGetLogEntryCollectionResponse {
+        for LogManagementGetLogEntryCollectionResponse
+    {
         fn from(value: &LogManagementGetLogEntryCollectionResponse) -> Self {
             value.clone()
         }
@@ -2409,7 +2235,8 @@ pub mod types {
         pub updated_at: chrono::DateTime<chrono::offset::Utc>,
     }
     impl From<&LogManagementGetLogEntryCollectionResponseItemsItem>
-    for LogManagementGetLogEntryCollectionResponseItemsItem {
+        for LogManagementGetLogEntryCollectionResponseItemsItem
+    {
         fn from(value: &LogManagementGetLogEntryCollectionResponseItemsItem) -> Self {
             value.clone()
         }
@@ -2424,22 +2251,18 @@ pub mod types {
         }
     }
     impl From<LogManagementGetLogEntryCollectionResponseItemsItemSource> for String {
-        fn from(
-            value: LogManagementGetLogEntryCollectionResponseItemsItemSource,
-        ) -> Self {
+        fn from(value: LogManagementGetLogEntryCollectionResponseItemsItemSource) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogEntryCollectionResponseItemsItemSource>
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
-        fn from(
-            value: &LogManagementGetLogEntryCollectionResponseItemsItemSource,
-        ) -> Self {
+        for LogManagementGetLogEntryCollectionResponseItemsItemSource
+    {
+        fn from(value: &LogManagementGetLogEntryCollectionResponseItemsItemSource) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
+    impl std::str::FromStr for LogManagementGetLogEntryCollectionResponseItemsItemSource {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -2448,66 +2271,55 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryCollectionResponseItemsItemSource {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryCollectionResponseItemsItemSource {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryCollectionResponseItemsItemSource {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntryCollectionResponseItemsItemSource {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogEntryCollectionResponseItemsItemSource {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementGetLogEntryCollectionResponseItemsItemTagsItem(String);
-    impl std::ops::Deref
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+    impl std::ops::Deref for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
     impl From<LogManagementGetLogEntryCollectionResponseItemsItemTagsItem> for String {
-        fn from(
-            value: LogManagementGetLogEntryCollectionResponseItemsItemTagsItem,
-        ) -> Self {
+        fn from(value: LogManagementGetLogEntryCollectionResponseItemsItemTagsItem) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogEntryCollectionResponseItemsItemTagsItem>
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
-        fn from(
-            value: &LogManagementGetLogEntryCollectionResponseItemsItemTagsItem,
-        ) -> Self {
+        for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem
+    {
+        fn from(value: &LogManagementGetLogEntryCollectionResponseItemsItemTagsItem) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+    impl std::str::FromStr for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -2516,62 +2328,46 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+        for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogEntryCollectionResponseItemsItemTagsItem {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryCollectionResponseItemsItemType {
         #[serde(rename = "log_entry")]
         LogEntry,
     }
     impl From<&LogManagementGetLogEntryCollectionResponseItemsItemType>
-    for LogManagementGetLogEntryCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogEntryCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogEntryCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogEntryCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -2591,46 +2387,33 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryCollectionResponseType {
         #[serde(rename = "paginated_collection")]
         PaginatedCollection,
     }
     impl From<&LogManagementGetLogEntryCollectionResponseType>
-    for LogManagementGetLogEntryCollectionResponseType {
+        for LogManagementGetLogEntryCollectionResponseType
+    {
         fn from(value: &LogManagementGetLogEntryCollectionResponseType) -> Self {
             value.clone()
         }
@@ -2657,33 +2440,20 @@ pub mod types {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///The frequency for log statistics, specifying how the data should be aggregated.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryFrequencyCountCollectionFrequency {
         #[serde(rename = "yearly")]
         Yearly,
@@ -2699,10 +2469,9 @@ pub mod types {
         Hourly,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionFrequency>
-    for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
-        fn from(
-            value: &LogManagementGetLogEntryFrequencyCountCollectionFrequency,
-        ) -> Self {
+        for LogManagementGetLogEntryFrequencyCountCollectionFrequency
+    {
+        fn from(value: &LogManagementGetLogEntryFrequencyCountCollectionFrequency) -> Self {
             value.clone()
         }
     }
@@ -2718,8 +2487,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
+    impl std::str::FromStr for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -2733,22 +2501,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -2758,18 +2523,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementGetLogEntryFrequencyCountCollectionResponse {
         ///Array of LogEntryFrequencyCountResource.
-        pub items: Vec<
-            LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem,
-        >,
+        pub items: Vec<LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementGetLogEntryFrequencyCountCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionResponse>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponse {
-        fn from(
-            value: &LogManagementGetLogEntryFrequencyCountCollectionResponse,
-        ) -> Self {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponse
+    {
+        fn from(value: &LogManagementGetLogEntryFrequencyCountCollectionResponse) -> Self {
             value.clone()
         }
     }
@@ -2785,48 +2547,35 @@ pub mod types {
         pub type_: LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem {
-        fn from(
-            value: &LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem,
-        ) -> Self {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem
+    {
+        fn from(value: &LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItem) -> Self {
             value.clone()
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
         #[serde(rename = "log_entry_frequency_count")]
         LogEntryFrequencyCount,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType
+    {
         fn from(
             value: &LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+    impl ToString for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntryFrequencyCount => "log_entry_frequency_count".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -2836,48 +2585,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryFrequencyCountCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionResponseType>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
-        fn from(
-            value: &LogManagementGetLogEntryFrequencyCountCollectionResponseType,
-        ) -> Self {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseType
+    {
+        fn from(value: &LogManagementGetLogEntryFrequencyCountCollectionResponseType) -> Self {
             value.clone()
         }
     }
@@ -2888,8 +2628,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
+    impl std::str::FromStr for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -2898,22 +2637,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
+        for LogManagementGetLogEntryFrequencyCountCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -2961,8 +2701,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogEntryResponseSource>
-    for LogManagementGetLogEntryResponseSource {
+    impl From<&LogManagementGetLogEntryResponseSource> for LogManagementGetLogEntryResponseSource {
         fn from(value: &LogManagementGetLogEntryResponseSource) -> Self {
             value.clone()
         }
@@ -3001,9 +2740,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
@@ -3019,8 +2756,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogEntryResponseTagsItem>
-    for LogManagementGetLogEntryResponseTagsItem {
+    impl From<&LogManagementGetLogEntryResponseTagsItem> for LogManagementGetLogEntryResponseTagsItem {
         fn from(value: &LogManagementGetLogEntryResponseTagsItem) -> Self {
             value.clone()
         }
@@ -3059,30 +2795,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryResponseType {
         #[serde(rename = "log_entry")]
         LogEntry,
     }
-    impl From<&LogManagementGetLogEntryResponseType>
-    for LogManagementGetLogEntryResponseType {
+    impl From<&LogManagementGetLogEntryResponseType> for LogManagementGetLogEntryResponseType {
         fn from(value: &LogManagementGetLogEntryResponseType) -> Self {
             value.clone()
         }
@@ -3131,7 +2853,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntrySourceCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponse>
-    for LogManagementGetLogEntrySourceCollectionResponse {
+        for LogManagementGetLogEntrySourceCollectionResponse
+    {
         fn from(value: &LogManagementGetLogEntrySourceCollectionResponse) -> Self {
             value.clone()
         }
@@ -3146,41 +2869,34 @@ pub mod types {
         pub type_: LogManagementGetLogEntrySourceCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponseItemsItem>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItem {
-        fn from(
-            value: &LogManagementGetLogEntrySourceCollectionResponseItemsItem,
-        ) -> Self {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItem
+    {
+        fn from(value: &LogManagementGetLogEntrySourceCollectionResponseItemsItem) -> Self {
             value.clone()
         }
     }
     ///Source of the log entry.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementGetLogEntrySourceCollectionResponseItemsItemSource(String);
-    impl std::ops::Deref
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+    impl std::ops::Deref for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementGetLogEntrySourceCollectionResponseItemsItemSource>
-    for String {
-        fn from(
-            value: LogManagementGetLogEntrySourceCollectionResponseItemsItemSource,
-        ) -> Self {
+    impl From<LogManagementGetLogEntrySourceCollectionResponseItemsItemSource> for String {
+        fn from(value: LogManagementGetLogEntrySourceCollectionResponseItemsItemSource) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponseItemsItemSource>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
-        fn from(
-            value: &LogManagementGetLogEntrySourceCollectionResponseItemsItemSource,
-        ) -> Self {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource
+    {
+        fn from(value: &LogManagementGetLogEntrySourceCollectionResponseItemsItemSource) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+    impl std::str::FromStr for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -3190,61 +2906,51 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemSource
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
         #[serde(rename = "log_entry_source")]
         LogEntrySource,
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponseItemsItemType>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogEntrySourceCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogEntrySourceCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -3255,8 +2961,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -3265,46 +2970,37 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponseType>
-    for LogManagementGetLogEntrySourceCollectionResponseType {
+        for LogManagementGetLogEntrySourceCollectionResponseType
+    {
         fn from(value: &LogManagementGetLogEntrySourceCollectionResponseType) -> Self {
             value.clone()
         }
@@ -3325,22 +3021,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntrySourceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntrySourceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntrySourceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -3350,18 +3043,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementGetLogEntrySourceFrequencyCollectionResponse {
         ///Array of LogEntrySourceFrequencyResource.
-        pub items: Vec<
-            LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem,
-        >,
+        pub items: Vec<LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementGetLogEntrySourceFrequencyCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponse>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponse {
-        fn from(
-            value: &LogManagementGetLogEntrySourceFrequencyCollectionResponse,
-        ) -> Self {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponse
+    {
+        fn from(value: &LogManagementGetLogEntrySourceFrequencyCollectionResponse) -> Self {
             value.clone()
         }
     }
@@ -3378,7 +3068,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem
+    {
         fn from(
             value: &LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItem,
         ) -> Self {
@@ -3387,18 +3078,14 @@ pub mod types {
     }
     ///Source associated with the frequency count.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+    pub struct LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource(String);
+    impl std::ops::Deref for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource>
-    for String {
+    impl From<LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource> for String {
         fn from(
             value: LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource,
         ) -> Self {
@@ -3406,7 +3093,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         fn from(
             value: &LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource,
         ) -> Self {
@@ -3414,7 +3102,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() > 128usize {
@@ -3427,74 +3116,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemSource
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
         #[serde(rename = "log_entry_source_frequency")]
         LogEntrySourceFrequency,
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType
+    {
         fn from(
             value: &LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+    impl ToString for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntrySourceFrequency => "log_entry_source_frequency".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -3504,48 +3183,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponseType>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
-        fn from(
-            value: &LogManagementGetLogEntrySourceFrequencyCollectionResponseType,
-        ) -> Self {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseType
+    {
+        fn from(value: &LogManagementGetLogEntrySourceFrequencyCollectionResponseType) -> Self {
             value.clone()
         }
     }
@@ -3556,8 +3226,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
+    impl std::str::FromStr for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -3566,22 +3235,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
+        for LogManagementGetLogEntrySourceFrequencyCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -3597,7 +3267,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntryTagCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponse>
-    for LogManagementGetLogEntryTagCollectionResponse {
+        for LogManagementGetLogEntryTagCollectionResponse
+    {
         fn from(value: &LogManagementGetLogEntryTagCollectionResponse) -> Self {
             value.clone()
         }
@@ -3612,7 +3283,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntryTagCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponseItemsItem>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItem {
+        for LogManagementGetLogEntryTagCollectionResponseItemsItem
+    {
         fn from(value: &LogManagementGetLogEntryTagCollectionResponseItemsItem) -> Self {
             value.clone()
         }
@@ -3627,22 +3299,18 @@ pub mod types {
         }
     }
     impl From<LogManagementGetLogEntryTagCollectionResponseItemsItemTag> for String {
-        fn from(
-            value: LogManagementGetLogEntryTagCollectionResponseItemsItemTag,
-        ) -> Self {
+        fn from(value: LogManagementGetLogEntryTagCollectionResponseItemsItemTag) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponseItemsItemTag>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
-        fn from(
-            value: &LogManagementGetLogEntryTagCollectionResponseItemsItemTag,
-        ) -> Self {
+        for LogManagementGetLogEntryTagCollectionResponseItemsItemTag
+    {
+        fn from(value: &LogManagementGetLogEntryTagCollectionResponseItemsItemTag) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
+    impl std::str::FromStr for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -3651,62 +3319,44 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
+    impl<'de> serde::Deserialize<'de> for LogManagementGetLogEntryTagCollectionResponseItemsItemTag {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagCollectionResponseItemsItemType {
         #[serde(rename = "log_entry_tag")]
         LogEntryTag,
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponseItemsItemType>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogEntryTagCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogEntryTagCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogEntryTagCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -3717,8 +3367,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -3727,46 +3376,33 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryTagCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponseType>
-    for LogManagementGetLogEntryTagCollectionResponseType {
+        for LogManagementGetLogEntryTagCollectionResponseType
+    {
         fn from(value: &LogManagementGetLogEntryTagCollectionResponseType) -> Self {
             value.clone()
         }
@@ -3787,22 +3423,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryTagCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogEntryTagCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogEntryTagCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -3812,18 +3445,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementGetLogEntryTagDistributionCollectionResponse {
         ///Array of LogEntryTagDistributionResource.
-        pub items: Vec<
-            LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem,
-        >,
+        pub items: Vec<LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementGetLogEntryTagDistributionCollectionResponseType,
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponse>
-    for LogManagementGetLogEntryTagDistributionCollectionResponse {
-        fn from(
-            value: &LogManagementGetLogEntryTagDistributionCollectionResponse,
-        ) -> Self {
+        for LogManagementGetLogEntryTagDistributionCollectionResponse
+    {
+        fn from(value: &LogManagementGetLogEntryTagDistributionCollectionResponse) -> Self {
             value.clone()
         }
     }
@@ -3839,7 +3469,8 @@ pub mod types {
         pub type_: LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem
+    {
         fn from(
             value: &LogManagementGetLogEntryTagDistributionCollectionResponseItemsItem,
         ) -> Self {
@@ -3848,18 +3479,14 @@ pub mod types {
     }
     ///Tag associated with the distribution.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+    pub struct LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag(String);
+    impl std::ops::Deref for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag>
-    for String {
+    impl From<LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag> for String {
         fn from(
             value: LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag,
         ) -> Self {
@@ -3867,15 +3494,15 @@ pub mod types {
         }
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag
+    {
         fn from(
             value: &LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag,
         ) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+    impl std::str::FromStr for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -3885,74 +3512,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemTag
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
         #[serde(rename = "log_entry_tag_distribution")]
         LogEntryTagDistribution,
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType
+    {
         fn from(
             value: &LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+    impl ToString for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntryTagDistribution => "log_entry_tag_distribution".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -3962,48 +3579,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagDistributionCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponseType>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseType {
-        fn from(
-            value: &LogManagementGetLogEntryTagDistributionCollectionResponseType,
-        ) -> Self {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseType
+    {
+        fn from(value: &LogManagementGetLogEntryTagDistributionCollectionResponseType) -> Self {
             value.clone()
         }
     }
@@ -4014,8 +3622,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogEntryTagDistributionCollectionResponseType {
+    impl std::str::FromStr for LogManagementGetLogEntryTagDistributionCollectionResponseType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -4024,40 +3631,30 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogEntryTagDistributionCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogEntryTagDistributionCollectionResponseType {
+        for LogManagementGetLogEntryTagDistributionCollectionResponseType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///The frequency for log statistics, specifying how the data should be aggregated.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogFrequencyCountCollectionFrequency {
         #[serde(rename = "yearly")]
         Yearly,
@@ -4073,7 +3670,8 @@ pub mod types {
         Hourly,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionFrequency>
-    for LogManagementGetLogFrequencyCountCollectionFrequency {
+        for LogManagementGetLogFrequencyCountCollectionFrequency
+    {
         fn from(value: &LogManagementGetLogFrequencyCountCollectionFrequency) -> Self {
             value.clone()
         }
@@ -4104,22 +3702,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogFrequencyCountCollectionFrequency {
+    impl std::convert::TryFrom<String> for LogManagementGetLogFrequencyCountCollectionFrequency {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -4135,7 +3730,8 @@ pub mod types {
         pub type_: LogManagementGetLogFrequencyCountCollectionResponseType,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionResponse>
-    for LogManagementGetLogFrequencyCountCollectionResponse {
+        for LogManagementGetLogFrequencyCountCollectionResponse
+    {
         fn from(value: &LogManagementGetLogFrequencyCountCollectionResponse) -> Self {
             value.clone()
         }
@@ -4152,35 +3748,22 @@ pub mod types {
         pub type_: LogManagementGetLogFrequencyCountCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionResponseItemsItem>
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItem {
-        fn from(
-            value: &LogManagementGetLogFrequencyCountCollectionResponseItemsItem,
-        ) -> Self {
+        for LogManagementGetLogFrequencyCountCollectionResponseItemsItem
+    {
+        fn from(value: &LogManagementGetLogFrequencyCountCollectionResponseItemsItem) -> Self {
             value.clone()
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
         #[serde(rename = "log_frequency_count")]
         LogFrequencyCount,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionResponseItemsItemType>
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogFrequencyCountCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogFrequencyCountCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -4191,8 +3774,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -4202,48 +3784,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType {
+        for LogManagementGetLogFrequencyCountCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogFrequencyCountCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionResponseType>
-    for LogManagementGetLogFrequencyCountCollectionResponseType {
-        fn from(
-            value: &LogManagementGetLogFrequencyCountCollectionResponseType,
-        ) -> Self {
+        for LogManagementGetLogFrequencyCountCollectionResponseType
+    {
+        fn from(value: &LogManagementGetLogFrequencyCountCollectionResponseType) -> Self {
             value.clone()
         }
     }
@@ -4263,22 +3836,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogFrequencyCountCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogFrequencyCountCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogFrequencyCountCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogFrequencyCountCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogFrequencyCountCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogFrequencyCountCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -4294,7 +3864,8 @@ pub mod types {
         pub type_: LogManagementGetLogLevelStatisticsCollectionResponseType,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponse>
-    for LogManagementGetLogLevelStatisticsCollectionResponse {
+        for LogManagementGetLogLevelStatisticsCollectionResponse
+    {
         fn from(value: &LogManagementGetLogLevelStatisticsCollectionResponse) -> Self {
             value.clone()
         }
@@ -4311,10 +3882,9 @@ pub mod types {
         pub type_: LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseItemsItem>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItem {
-        fn from(
-            value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItem,
-        ) -> Self {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItem
+    {
+        fn from(value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItem) -> Self {
             value.clone()
         }
     }
@@ -4327,7 +3897,8 @@ pub mod types {
         pub value: LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevel>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevel {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevel
+    {
         fn from(
             value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevel,
         ) -> Self {
@@ -4335,18 +3906,7 @@ pub mod types {
         }
     }
     ///Name of the level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
         Debug,
         Info,
@@ -4358,15 +3918,15 @@ pub mod types {
         Emergency,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName
+    {
         fn from(
             value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+    impl ToString for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
         fn to_string(&self) -> String {
             match *self {
                 Self::Debug => "Debug".to_string(),
@@ -4380,8 +3940,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+    impl std::str::FromStr for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -4398,21 +3957,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -4420,18 +3982,14 @@ pub mod types {
     }
     ///Value of the level.
     #[derive(Clone, Debug, Serialize)]
-    pub struct LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue(
-        i64,
-    );
-    impl std::ops::Deref
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue {
+    pub struct LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue(i64);
+    impl std::ops::Deref for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue {
         type Target = i64;
         fn deref(&self) -> &i64 {
             &self.0
         }
     }
-    impl From<LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue>
-    for i64 {
+    impl From<LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue> for i64 {
         fn from(
             value: LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue,
         ) -> Self {
@@ -4439,7 +3997,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue
+    {
         fn from(
             value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue,
         ) -> Self {
@@ -4447,11 +4006,14 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<i64>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue
+    {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -4460,37 +4022,26 @@ pub mod types {
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemLevelValue
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
         #[serde(rename = "log_level_statistics")]
         LogLevelStatistics,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -4501,8 +4052,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -4512,48 +4062,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType {
+        for LogManagementGetLogLevelStatisticsCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogLevelStatisticsCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseType>
-    for LogManagementGetLogLevelStatisticsCollectionResponseType {
-        fn from(
-            value: &LogManagementGetLogLevelStatisticsCollectionResponseType,
-        ) -> Self {
+        for LogManagementGetLogLevelStatisticsCollectionResponseType
+    {
+        fn from(value: &LogManagementGetLogLevelStatisticsCollectionResponseType) -> Self {
             value.clone()
         }
     }
@@ -4573,22 +4114,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogLevelStatisticsCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogLevelStatisticsCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogLevelStatisticsCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogLevelStatisticsCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogLevelStatisticsCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -4604,7 +4142,8 @@ pub mod types {
         pub type_: LogManagementGetLogNamespaceCollectionResponseType,
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponse>
-    for LogManagementGetLogNamespaceCollectionResponse {
+        for LogManagementGetLogNamespaceCollectionResponse
+    {
         fn from(value: &LogManagementGetLogNamespaceCollectionResponse) -> Self {
             value.clone()
         }
@@ -4619,41 +4158,34 @@ pub mod types {
         pub type_: LogManagementGetLogNamespaceCollectionResponseItemsItemType,
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponseItemsItem>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItem {
-        fn from(
-            value: &LogManagementGetLogNamespaceCollectionResponseItemsItem,
-        ) -> Self {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItem
+    {
+        fn from(value: &LogManagementGetLogNamespaceCollectionResponseItemsItem) -> Self {
             value.clone()
         }
     }
     ///Namespace of the log.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace(String);
-    impl std::ops::Deref
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+    impl std::ops::Deref for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace>
-    for String {
-        fn from(
-            value: LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace,
-        ) -> Self {
+    impl From<LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace> for String {
+        fn from(value: LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace) -> Self {
             value.0
         }
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
-        fn from(
-            value: &LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace,
-        ) -> Self {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace
+    {
+        fn from(value: &LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+    impl std::str::FromStr for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -4663,61 +4195,51 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemNamespace
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogNamespaceCollectionResponseItemsItemType {
         #[serde(rename = "log_namespace")]
         LogNamespace,
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponseItemsItemType>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
-        fn from(
-            value: &LogManagementGetLogNamespaceCollectionResponseItemsItemType,
-        ) -> Self {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemType
+    {
+        fn from(value: &LogManagementGetLogNamespaceCollectionResponseItemsItemType) -> Self {
             value.clone()
         }
     }
@@ -4728,8 +4250,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
+    impl std::str::FromStr for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -4738,46 +4259,35 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
+        for LogManagementGetLogNamespaceCollectionResponseItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogNamespaceCollectionResponseItemsItemType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogNamespaceCollectionResponseType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponseType>
-    for LogManagementGetLogNamespaceCollectionResponseType {
+        for LogManagementGetLogNamespaceCollectionResponseType
+    {
         fn from(value: &LogManagementGetLogNamespaceCollectionResponseType) -> Self {
             value.clone()
         }
@@ -4798,22 +4308,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementGetLogNamespaceCollectionResponseType {
+    impl std::convert::TryFrom<&str> for LogManagementGetLogNamespaceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementGetLogNamespaceCollectionResponseType {
+    impl std::convert::TryFrom<&String> for LogManagementGetLogNamespaceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementGetLogNamespaceCollectionResponseType {
+    impl std::convert::TryFrom<String> for LogManagementGetLogNamespaceCollectionResponseType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -4862,18 +4369,7 @@ pub mod types {
         }
     }
     ///Name of the log level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogResponseLevelName {
         Debug,
         Info,
@@ -4884,8 +4380,7 @@ pub mod types {
         Alert,
         Emergency,
     }
-    impl From<&LogManagementGetLogResponseLevelName>
-    for LogManagementGetLogResponseLevelName {
+    impl From<&LogManagementGetLogResponseLevelName> for LogManagementGetLogResponseLevelName {
         fn from(value: &LogManagementGetLogResponseLevelName) -> Self {
             value.clone()
         }
@@ -4952,8 +4447,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogResponseLevelValue>
-    for LogManagementGetLogResponseLevelValue {
+    impl From<&LogManagementGetLogResponseLevelValue> for LogManagementGetLogResponseLevelValue {
         fn from(value: &LogManagementGetLogResponseLevelValue) -> Self {
             value.clone()
         }
@@ -4961,8 +4455,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementGetLogResponseLevelValue {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -4976,7 +4472,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace of the log.
@@ -4993,8 +4489,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogResponseNamespace>
-    for LogManagementGetLogResponseNamespace {
+    impl From<&LogManagementGetLogResponseNamespace> for LogManagementGetLogResponseNamespace {
         fn from(value: &LogManagementGetLogResponseNamespace) -> Self {
             value.clone()
         }
@@ -5033,9 +4528,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template for formatting the message.
@@ -5052,8 +4545,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementGetLogResponseTemplate>
-    for LogManagementGetLogResponseTemplate {
+    impl From<&LogManagementGetLogResponseTemplate> for LogManagementGetLogResponseTemplate {
         fn from(value: &LogManagementGetLogResponseTemplate) -> Self {
             value.clone()
         }
@@ -5092,24 +4584,11 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogResponseType {
         #[serde(rename = "log")]
         Log,
@@ -5173,8 +4652,7 @@ pub mod types {
         pub source: LogManagementLogCollectLogEntriesItemSource,
         pub tags: Vec<String>,
     }
-    impl From<&LogManagementLogCollectLogEntriesItem>
-    for LogManagementLogCollectLogEntriesItem {
+    impl From<&LogManagementLogCollectLogEntriesItem> for LogManagementLogCollectLogEntriesItem {
         fn from(value: &LogManagementLogCollectLogEntriesItem) -> Self {
             value.clone()
         }
@@ -5194,7 +4672,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogCollectLogEntriesItemSource>
-    for LogManagementLogCollectLogEntriesItemSource {
+        for LogManagementLogCollectLogEntriesItemSource
+    {
         fn from(value: &LogManagementLogCollectLogEntriesItemSource) -> Self {
             value.clone()
         }
@@ -5236,9 +4715,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -5270,8 +4747,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCollectLogEntrySource>
-    for LogManagementLogCollectLogEntrySource {
+    impl From<&LogManagementLogCollectLogEntrySource> for LogManagementLogCollectLogEntrySource {
         fn from(value: &LogManagementLogCollectLogEntrySource) -> Self {
             value.clone()
         }
@@ -5313,9 +4789,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -5346,8 +4820,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCollectLogLogLevel>
-    for LogManagementLogCollectLogLogLevel {
+    impl From<&LogManagementLogCollectLogLogLevel> for LogManagementLogCollectLogLogLevel {
         fn from(value: &LogManagementLogCollectLogLogLevel) -> Self {
             value.clone()
         }
@@ -5355,8 +4828,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementLogCollectLogLogLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -5370,7 +4845,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -5387,8 +4862,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCollectLogLogNamespace>
-    for LogManagementLogCollectLogLogNamespace {
+    impl From<&LogManagementLogCollectLogLogNamespace> for LogManagementLogCollectLogLogNamespace {
         fn from(value: &LogManagementLogCollectLogLogNamespace) -> Self {
             value.clone()
         }
@@ -5430,9 +4904,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -5449,8 +4921,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCollectLogLogTemplate>
-    for LogManagementLogCollectLogLogTemplate {
+    impl From<&LogManagementLogCollectLogLogTemplate> for LogManagementLogCollectLogLogTemplate {
         fn from(value: &LogManagementLogCollectLogLogTemplate) -> Self {
             value.clone()
         }
@@ -5492,9 +4963,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -5542,8 +5011,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCreateLogEntrySource>
-    for LogManagementLogCreateLogEntrySource {
+    impl From<&LogManagementLogCreateLogEntrySource> for LogManagementLogCreateLogEntrySource {
         fn from(value: &LogManagementLogCreateLogEntrySource) -> Self {
             value.clone()
         }
@@ -5585,9 +5053,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The severity level of the log.
@@ -5612,8 +5078,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementLogCreateLogLevel {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -5627,7 +5095,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace associated with the log.
@@ -5644,8 +5112,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogCreateLogNamespace>
-    for LogManagementLogCreateLogNamespace {
+    impl From<&LogManagementLogCreateLogNamespace> for LogManagementLogCreateLogNamespace {
         fn from(value: &LogManagementLogCreateLogNamespace) -> Self {
             value.clone()
         }
@@ -5687,9 +5154,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template used for formatting the log message.
@@ -5748,9 +5213,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The date and time after which the log entry was created.
@@ -5764,20 +5227,17 @@ pub mod types {
             &self.0
         }
     }
-    impl From<LogManagementLogLogEntryFilterAfter>
-    for Option<chrono::DateTime<chrono::offset::Utc>> {
+    impl From<LogManagementLogLogEntryFilterAfter> for Option<chrono::DateTime<chrono::offset::Utc>> {
         fn from(value: LogManagementLogLogEntryFilterAfter) -> Self {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryFilterAfter>
-    for LogManagementLogLogEntryFilterAfter {
+    impl From<&LogManagementLogLogEntryFilterAfter> for LogManagementLogLogEntryFilterAfter {
         fn from(value: &LogManagementLogLogEntryFilterAfter) -> Self {
             value.clone()
         }
     }
-    impl From<Option<chrono::DateTime<chrono::offset::Utc>>>
-    for LogManagementLogLogEntryFilterAfter {
+    impl From<Option<chrono::DateTime<chrono::offset::Utc>>> for LogManagementLogLogEntryFilterAfter {
         fn from(value: Option<chrono::DateTime<chrono::offset::Utc>>) -> Self {
             Self(value)
         }
@@ -5793,20 +5253,17 @@ pub mod types {
             &self.0
         }
     }
-    impl From<LogManagementLogLogEntryFilterBefore>
-    for Option<chrono::DateTime<chrono::offset::Utc>> {
+    impl From<LogManagementLogLogEntryFilterBefore> for Option<chrono::DateTime<chrono::offset::Utc>> {
         fn from(value: LogManagementLogLogEntryFilterBefore) -> Self {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryFilterBefore>
-    for LogManagementLogLogEntryFilterBefore {
+    impl From<&LogManagementLogLogEntryFilterBefore> for LogManagementLogLogEntryFilterBefore {
         fn from(value: &LogManagementLogLogEntryFilterBefore) -> Self {
             value.clone()
         }
     }
-    impl From<Option<chrono::DateTime<chrono::offset::Utc>>>
-    for LogManagementLogLogEntryFilterBefore {
+    impl From<Option<chrono::DateTime<chrono::offset::Utc>>> for LogManagementLogLogEntryFilterBefore {
         fn from(value: Option<chrono::DateTime<chrono::offset::Utc>>) -> Self {
             Self(value)
         }
@@ -5826,7 +5283,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogEntryFilterLogIdentity>
-    for LogManagementLogLogEntryFilterLogIdentity {
+        for LogManagementLogLogEntryFilterLogIdentity
+    {
         fn from(value: &LogManagementLogLogEntryFilterLogIdentity) -> Self {
             value.clone()
         }
@@ -5837,26 +5295,14 @@ pub mod types {
         }
     }
     ///The order of the log entries.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryFilterOrder {
         #[serde(rename = "ASC")]
         Asc,
         #[serde(rename = "DESC")]
         Desc,
     }
-    impl From<&LogManagementLogLogEntryFilterOrder>
-    for LogManagementLogLogEntryFilterOrder {
+    impl From<&LogManagementLogLogEntryFilterOrder> for LogManagementLogLogEntryFilterOrder {
         fn from(value: &LogManagementLogLogEntryFilterOrder) -> Self {
             value.clone()
         }
@@ -5916,8 +5362,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryFilterSource>
-    for LogManagementLogLogEntryFilterSource {
+    impl From<&LogManagementLogLogEntryFilterSource> for LogManagementLogLogEntryFilterSource {
         fn from(value: &LogManagementLogLogEntryFilterSource) -> Self {
             value.clone()
         }
@@ -5961,9 +5406,7 @@ pub mod types {
         ///First item index.
         pub first: i64,
         ///Array of LogEntryResource.
-        pub items: Vec<
-            LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem,
-        >,
+        pub items: Vec<LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem>,
         ///Number of items per page.
         pub items_per_page: i64,
         ///Last item index.
@@ -5983,10 +5426,9 @@ pub mod types {
         pub type_: LogManagementLogLogEntryResourcePaginatedCollectionResourceType,
     }
     impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResource>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResource {
-        fn from(
-            value: &LogManagementLogLogEntryResourcePaginatedCollectionResource,
-        ) -> Self {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResource
+    {
+        fn from(value: &LogManagementLogLogEntryResourcePaginatedCollectionResource) -> Self {
             value.clone()
         }
     }
@@ -6006,9 +5448,7 @@ pub mod types {
         ///Source of the log entry.
         pub source: LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource,
         ///Tags associated with the log entry.
-        pub tags: Vec<
-            LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem,
-        >,
+        pub tags: Vec<LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem>,
         ///Type of the resource.
         #[serde(rename = "type")]
         pub type_: LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType,
@@ -6016,7 +5456,8 @@ pub mod types {
         pub updated_at: chrono::DateTime<chrono::offset::Utc>,
     }
     impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItem,
         ) -> Self {
@@ -6025,27 +5466,25 @@ pub mod types {
     }
     ///Source of the log entry.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource(
-        String,
-    );
+    pub struct LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource(String);
     impl std::ops::Deref
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource>
-    for String {
+    impl From<LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource> for String {
         fn from(
             value: LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource,
         ) -> Self {
             value.0
         }
     }
-    impl From<
-        &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource,
-    > for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+    impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource>
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         fn from(
             value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource,
         ) -> Self {
@@ -6053,7 +5492,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -6063,62 +5503,61 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemSource
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem(
-        String,
-    );
+    pub struct LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem(String);
     impl std::ops::Deref
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<
-        LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem,
-    > for String {
+    impl From<LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem> for String {
         fn from(
             value: LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem,
         ) -> Self {
             value.0
         }
     }
-    impl From<
-        &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem,
-    > for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+    impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem>
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         fn from(
             value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem,
         ) -> Self {
@@ -6126,7 +5565,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -6136,66 +5576,57 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemTagsItem
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
         #[serde(rename = "log_entry")]
         LogEntry,
     }
     impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+    impl ToString for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntry => "log_entry".to_string(),
@@ -6203,7 +5634,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -6213,48 +5645,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
         #[serde(rename = "paginated_collection")]
         PaginatedCollection,
     }
     impl From<&LogManagementLogLogEntryResourcePaginatedCollectionResourceType>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
-        fn from(
-            value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceType,
-        ) -> Self {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceType
+    {
+        fn from(value: &LogManagementLogLogEntryResourcePaginatedCollectionResourceType) -> Self {
             value.clone()
         }
     }
@@ -6265,8 +5688,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
+    impl std::str::FromStr for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -6276,21 +5698,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryResourcePaginatedCollectionResourceType {
+        for LogManagementLogLogEntryResourcePaginatedCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -6310,8 +5735,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryResourceSource>
-    for LogManagementLogLogEntryResourceSource {
+    impl From<&LogManagementLogLogEntryResourceSource> for LogManagementLogLogEntryResourceSource {
         fn from(value: &LogManagementLogLogEntryResourceSource) -> Self {
             value.clone()
         }
@@ -6350,9 +5774,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
@@ -6368,8 +5790,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryResourceTagsItem>
-    for LogManagementLogLogEntryResourceTagsItem {
+    impl From<&LogManagementLogLogEntryResourceTagsItem> for LogManagementLogLogEntryResourceTagsItem {
         fn from(value: &LogManagementLogLogEntryResourceTagsItem) -> Self {
             value.clone()
         }
@@ -6408,30 +5829,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryResourceType {
         #[serde(rename = "log_entry")]
         LogEntry,
     }
-    impl From<&LogManagementLogLogEntryResourceType>
-    for LogManagementLogLogEntryResourceType {
+    impl From<&LogManagementLogLogEntryResourceType> for LogManagementLogLogEntryResourceType {
         fn from(value: &LogManagementLogLogEntryResourceType) -> Self {
             value.clone()
         }
@@ -6479,8 +5886,7 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogLogEntrySourceResourceType,
     }
-    impl From<&LogManagementLogLogEntrySourceResource>
-    for LogManagementLogLogEntrySourceResource {
+    impl From<&LogManagementLogLogEntrySourceResource> for LogManagementLogLogEntrySourceResource {
         fn from(value: &LogManagementLogLogEntrySourceResource) -> Self {
             value.clone()
         }
@@ -6489,18 +5895,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementLogLogEntrySourceResourceCollectionResource {
         ///Array of LogEntrySourceResource.
-        pub items: Vec<
-            LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem,
-        >,
+        pub items: Vec<LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementLogLogEntrySourceResourceCollectionResourceType,
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResource>
-    for LogManagementLogLogEntrySourceResourceCollectionResource {
-        fn from(
-            value: &LogManagementLogLogEntrySourceResourceCollectionResource,
-        ) -> Self {
+        for LogManagementLogLogEntrySourceResourceCollectionResource
+    {
+        fn from(value: &LogManagementLogLogEntrySourceResourceCollectionResource) -> Self {
             value.clone()
         }
     }
@@ -6514,27 +5917,22 @@ pub mod types {
         pub type_: LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType,
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem {
-        fn from(
-            value: &LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem,
-        ) -> Self {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem
+    {
+        fn from(value: &LogManagementLogLogEntrySourceResourceCollectionResourceItemsItem) -> Self {
             value.clone()
         }
     }
     ///Source of the log entry.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+    pub struct LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource(String);
+    impl std::ops::Deref for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource>
-    for String {
+    impl From<LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource> for String {
         fn from(
             value: LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource,
         ) -> Self {
@@ -6542,15 +5940,15 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource
+    {
         fn from(
             value: &LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource,
         ) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+    impl std::str::FromStr for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -6560,74 +5958,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemSource
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_entry_source")]
         LogEntrySource,
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+    impl ToString for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntrySource => "log_entry_source".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+    impl std::str::FromStr for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -6637,48 +6025,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntrySourceResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResourceType>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceType {
-        fn from(
-            value: &LogManagementLogLogEntrySourceResourceCollectionResourceType,
-        ) -> Self {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceType
+    {
+        fn from(value: &LogManagementLogLogEntrySourceResourceCollectionResourceType) -> Self {
             value.clone()
         }
     }
@@ -6689,8 +6068,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntrySourceResourceCollectionResourceType {
+    impl std::str::FromStr for LogManagementLogLogEntrySourceResourceCollectionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -6699,22 +6077,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogLogEntrySourceResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntrySourceResourceCollectionResourceType {
+        for LogManagementLogLogEntrySourceResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -6735,7 +6114,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogEntrySourceResourceSource>
-    for LogManagementLogLogEntrySourceResourceSource {
+        for LogManagementLogLogEntrySourceResourceSource
+    {
         fn from(value: &LogManagementLogLogEntrySourceResourceSource) -> Self {
             value.clone()
         }
@@ -6755,8 +6135,7 @@ pub mod types {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntrySourceResourceSource {
+    impl std::convert::TryFrom<&String> for LogManagementLogLogEntrySourceResourceSource {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
@@ -6775,30 +6154,18 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntrySourceResourceType {
         #[serde(rename = "log_entry_source")]
         LogEntrySource,
     }
     impl From<&LogManagementLogLogEntrySourceResourceType>
-    for LogManagementLogLogEntrySourceResourceType {
+        for LogManagementLogLogEntrySourceResourceType
+    {
         fn from(value: &LogManagementLogLogEntrySourceResourceType) -> Self {
             value.clone()
         }
@@ -6846,8 +6213,7 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogLogEntryTagResourceType,
     }
-    impl From<&LogManagementLogLogEntryTagResource>
-    for LogManagementLogLogEntryTagResource {
+    impl From<&LogManagementLogLogEntryTagResource> for LogManagementLogLogEntryTagResource {
         fn from(value: &LogManagementLogLogEntryTagResource) -> Self {
             value.clone()
         }
@@ -6862,7 +6228,8 @@ pub mod types {
         pub type_: LogManagementLogLogEntryTagResourceCollectionResourceType,
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResource>
-    for LogManagementLogLogEntryTagResourceCollectionResource {
+        for LogManagementLogLogEntryTagResourceCollectionResource
+    {
         fn from(value: &LogManagementLogLogEntryTagResourceCollectionResource) -> Self {
             value.clone()
         }
@@ -6877,41 +6244,34 @@ pub mod types {
         pub type_: LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType,
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResourceItemsItem>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItem {
-        fn from(
-            value: &LogManagementLogLogEntryTagResourceCollectionResourceItemsItem,
-        ) -> Self {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItem
+    {
+        fn from(value: &LogManagementLogLogEntryTagResourceCollectionResourceItemsItem) -> Self {
             value.clone()
         }
     }
     ///Tag of the log entry.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag(String);
-    impl std::ops::Deref
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+    impl std::ops::Deref for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag>
-    for String {
-        fn from(
-            value: LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag,
-        ) -> Self {
+    impl From<LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag> for String {
+        fn from(value: LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag) -> Self {
             value.0
         }
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
-        fn from(
-            value: &LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag,
-        ) -> Self {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag
+    {
+        fn from(value: &LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+    impl std::str::FromStr for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -6921,74 +6281,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemTag
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_entry_tag")]
         LogEntryTag,
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+    impl ToString for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntryTag => "log_entry_tag".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+    impl std::str::FromStr for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -6998,48 +6348,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogEntryTagResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryTagResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResourceType>
-    for LogManagementLogLogEntryTagResourceCollectionResourceType {
-        fn from(
-            value: &LogManagementLogLogEntryTagResourceCollectionResourceType,
-        ) -> Self {
+        for LogManagementLogLogEntryTagResourceCollectionResourceType
+    {
+        fn from(value: &LogManagementLogLogEntryTagResourceCollectionResourceType) -> Self {
             value.clone()
         }
     }
@@ -7050,8 +6391,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogEntryTagResourceCollectionResourceType {
+    impl std::str::FromStr for LogManagementLogLogEntryTagResourceCollectionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -7060,22 +6400,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogLogEntryTagResourceCollectionResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogLogEntryTagResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceType {
+    impl std::convert::TryFrom<&String> for LogManagementLogLogEntryTagResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogLogEntryTagResourceCollectionResourceType {
+    impl std::convert::TryFrom<String> for LogManagementLogLogEntryTagResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -7095,8 +6432,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogEntryTagResourceTag>
-    for LogManagementLogLogEntryTagResourceTag {
+    impl From<&LogManagementLogLogEntryTagResourceTag> for LogManagementLogLogEntryTagResourceTag {
         fn from(value: &LogManagementLogLogEntryTagResourceTag) -> Self {
             value.clone()
         }
@@ -7135,30 +6471,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryTagResourceType {
         #[serde(rename = "log_entry_tag")]
         LogEntryTag,
     }
-    impl From<&LogManagementLogLogEntryTagResourceType>
-    for LogManagementLogLogEntryTagResourceType {
+    impl From<&LogManagementLogLogEntryTagResourceType> for LogManagementLogLogEntryTagResourceType {
         fn from(value: &LogManagementLogLogEntryTagResourceType) -> Self {
             value.clone()
         }
@@ -7223,17 +6545,14 @@ pub mod types {
     }
     ///The date and time after which the log occurred.
     #[derive(Clone, Debug, Deserialize, Serialize)]
-    pub struct LogManagementLogLogFilterFrom(
-        pub Option<chrono::DateTime<chrono::offset::Utc>>,
-    );
+    pub struct LogManagementLogLogFilterFrom(pub Option<chrono::DateTime<chrono::offset::Utc>>);
     impl std::ops::Deref for LogManagementLogLogFilterFrom {
         type Target = Option<chrono::DateTime<chrono::offset::Utc>>;
         fn deref(&self) -> &Option<chrono::DateTime<chrono::offset::Utc>> {
             &self.0
         }
     }
-    impl From<LogManagementLogLogFilterFrom>
-    for Option<chrono::DateTime<chrono::offset::Utc>> {
+    impl From<LogManagementLogLogFilterFrom> for Option<chrono::DateTime<chrono::offset::Utc>> {
         fn from(value: LogManagementLogLogFilterFrom) -> Self {
             value.0
         }
@@ -7243,25 +6562,21 @@ pub mod types {
             value.clone()
         }
     }
-    impl From<Option<chrono::DateTime<chrono::offset::Utc>>>
-    for LogManagementLogLogFilterFrom {
+    impl From<Option<chrono::DateTime<chrono::offset::Utc>>> for LogManagementLogLogFilterFrom {
         fn from(value: Option<chrono::DateTime<chrono::offset::Utc>>) -> Self {
             Self(value)
         }
     }
     ///The levels of the log entries.
     #[derive(Clone, Debug, Deserialize, Serialize)]
-    pub struct LogManagementLogLogFilterLevels(
-        pub Vec<LogManagementLogLogFilterLevelsItem>,
-    );
+    pub struct LogManagementLogLogFilterLevels(pub Vec<LogManagementLogLogFilterLevelsItem>);
     impl std::ops::Deref for LogManagementLogLogFilterLevels {
         type Target = Vec<LogManagementLogLogFilterLevelsItem>;
         fn deref(&self) -> &Vec<LogManagementLogLogFilterLevelsItem> {
             &self.0
         }
     }
-    impl From<LogManagementLogLogFilterLevels>
-    for Vec<LogManagementLogLogFilterLevelsItem> {
+    impl From<LogManagementLogLogFilterLevels> for Vec<LogManagementLogLogFilterLevelsItem> {
         fn from(value: LogManagementLogLogFilterLevels) -> Self {
             value.0
         }
@@ -7271,8 +6586,7 @@ pub mod types {
             value.clone()
         }
     }
-    impl From<Vec<LogManagementLogLogFilterLevelsItem>>
-    for LogManagementLogLogFilterLevels {
+    impl From<Vec<LogManagementLogLogFilterLevelsItem>> for LogManagementLogLogFilterLevels {
         fn from(value: Vec<LogManagementLogLogFilterLevelsItem>) -> Self {
             Self(value)
         }
@@ -7290,8 +6604,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogFilterLevelsItem>
-    for LogManagementLogLogFilterLevelsItem {
+    impl From<&LogManagementLogLogFilterLevelsItem> for LogManagementLogLogFilterLevelsItem {
         fn from(value: &LogManagementLogLogFilterLevelsItem) -> Self {
             value.clone()
         }
@@ -7299,8 +6612,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementLogLogFilterLevelsItem {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -7314,22 +6629,11 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The order of the logs.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogFilterOrder {
         #[serde(rename = "ASC")]
         Asc,
@@ -7383,18 +6687,7 @@ pub mod types {
         }
     }
     ///The field to sort the logs by.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogFilterSortBy {
         #[serde(rename = "createdAt")]
         CreatedAt,
@@ -7461,17 +6754,14 @@ pub mod types {
     }
     ///The date and time before which the log occurred.
     #[derive(Clone, Debug, Deserialize, Serialize)]
-    pub struct LogManagementLogLogFilterTo(
-        pub Option<chrono::DateTime<chrono::offset::Utc>>,
-    );
+    pub struct LogManagementLogLogFilterTo(pub Option<chrono::DateTime<chrono::offset::Utc>>);
     impl std::ops::Deref for LogManagementLogLogFilterTo {
         type Target = Option<chrono::DateTime<chrono::offset::Utc>>;
         fn deref(&self) -> &Option<chrono::DateTime<chrono::offset::Utc>> {
             &self.0
         }
     }
-    impl From<LogManagementLogLogFilterTo>
-    for Option<chrono::DateTime<chrono::offset::Utc>> {
+    impl From<LogManagementLogLogFilterTo> for Option<chrono::DateTime<chrono::offset::Utc>> {
         fn from(value: LogManagementLogLogFilterTo) -> Self {
             value.0
         }
@@ -7481,8 +6771,7 @@ pub mod types {
             value.clone()
         }
     }
-    impl From<Option<chrono::DateTime<chrono::offset::Utc>>>
-    for LogManagementLogLogFilterTo {
+    impl From<Option<chrono::DateTime<chrono::offset::Utc>>> for LogManagementLogLogFilterTo {
         fn from(value: Option<chrono::DateTime<chrono::offset::Utc>>) -> Self {
             Self(value)
         }
@@ -7496,8 +6785,7 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogLogNamespaceResourceType,
     }
-    impl From<&LogManagementLogLogNamespaceResource>
-    for LogManagementLogLogNamespaceResource {
+    impl From<&LogManagementLogLogNamespaceResource> for LogManagementLogLogNamespaceResource {
         fn from(value: &LogManagementLogLogNamespaceResource) -> Self {
             value.clone()
         }
@@ -7512,7 +6800,8 @@ pub mod types {
         pub type_: LogManagementLogLogNamespaceResourceCollectionResourceType,
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResource>
-    for LogManagementLogLogNamespaceResourceCollectionResource {
+        for LogManagementLogLogNamespaceResourceCollectionResource
+    {
         fn from(value: &LogManagementLogLogNamespaceResourceCollectionResource) -> Self {
             value.clone()
         }
@@ -7527,27 +6816,22 @@ pub mod types {
         pub type_: LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType,
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResourceItemsItem>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItem {
-        fn from(
-            value: &LogManagementLogLogNamespaceResourceCollectionResourceItemsItem,
-        ) -> Self {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItem
+    {
+        fn from(value: &LogManagementLogLogNamespaceResourceCollectionResourceItemsItem) -> Self {
             value.clone()
         }
     }
     ///Namespace of the log.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+    pub struct LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace(String);
+    impl std::ops::Deref for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace>
-    for String {
+    impl From<LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace> for String {
         fn from(
             value: LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace,
         ) -> Self {
@@ -7555,7 +6839,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         fn from(
             value: &LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace,
         ) -> Self {
@@ -7563,7 +6848,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -7573,74 +6859,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemNamespace
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_namespace")]
         LogNamespace,
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+    impl ToString for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogNamespace => "log_namespace".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+    impl std::str::FromStr for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -7650,48 +6926,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType {
+        for LogManagementLogLogNamespaceResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogNamespaceResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResourceType>
-    for LogManagementLogLogNamespaceResourceCollectionResourceType {
-        fn from(
-            value: &LogManagementLogLogNamespaceResourceCollectionResourceType,
-        ) -> Self {
+        for LogManagementLogLogNamespaceResourceCollectionResourceType
+    {
+        fn from(value: &LogManagementLogLogNamespaceResourceCollectionResourceType) -> Self {
             value.clone()
         }
     }
@@ -7702,8 +6969,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogNamespaceResourceCollectionResourceType {
+    impl std::str::FromStr for LogManagementLogLogNamespaceResourceCollectionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -7712,22 +6978,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogLogNamespaceResourceCollectionResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogLogNamespaceResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceType {
+    impl std::convert::TryFrom<&String> for LogManagementLogLogNamespaceResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogLogNamespaceResourceCollectionResourceType {
+    impl std::convert::TryFrom<String> for LogManagementLogLogNamespaceResourceCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -7748,7 +7011,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogNamespaceResourceNamespace>
-    for LogManagementLogLogNamespaceResourceNamespace {
+        for LogManagementLogLogNamespaceResourceNamespace
+    {
         fn from(value: &LogManagementLogLogNamespaceResourceNamespace) -> Self {
             value.clone()
         }
@@ -7768,15 +7032,13 @@ pub mod types {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogLogNamespaceResourceNamespace {
+    impl std::convert::TryFrom<&String> for LogManagementLogLogNamespaceResourceNamespace {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogLogNamespaceResourceNamespace {
+    impl std::convert::TryFrom<String> for LogManagementLogLogNamespaceResourceNamespace {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -7789,30 +7051,16 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogNamespaceResourceType {
         #[serde(rename = "log_namespace")]
         LogNamespace,
     }
-    impl From<&LogManagementLogLogNamespaceResourceType>
-    for LogManagementLogLogNamespaceResourceType {
+    impl From<&LogManagementLogLogNamespaceResourceType> for LogManagementLogLogNamespaceResourceType {
         fn from(value: &LogManagementLogLogNamespaceResourceType) -> Self {
             value.clone()
         }
@@ -7894,18 +7142,7 @@ pub mod types {
         }
     }
     ///Name of the log level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogResourceLevelName {
         Debug,
         Info,
@@ -7916,8 +7153,7 @@ pub mod types {
         Alert,
         Emergency,
     }
-    impl From<&LogManagementLogLogResourceLevelName>
-    for LogManagementLogLogResourceLevelName {
+    impl From<&LogManagementLogLogResourceLevelName> for LogManagementLogLogResourceLevelName {
         fn from(value: &LogManagementLogLogResourceLevelName) -> Self {
             value.clone()
         }
@@ -7984,8 +7220,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogResourceLevelValue>
-    for LogManagementLogLogResourceLevelValue {
+    impl From<&LogManagementLogLogResourceLevelValue> for LogManagementLogLogResourceLevelValue {
         fn from(value: &LogManagementLogLogResourceLevelValue) -> Self {
             value.clone()
         }
@@ -7993,8 +7228,10 @@ pub mod types {
     impl std::convert::TryFrom<i64> for LogManagementLogLogResourceLevelValue {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -8008,7 +7245,7 @@ pub mod types {
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace of the log.
@@ -8025,8 +7262,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogResourceNamespace>
-    for LogManagementLogLogResourceNamespace {
+    impl From<&LogManagementLogLogResourceNamespace> for LogManagementLogLogResourceNamespace {
         fn from(value: &LogManagementLogLogResourceNamespace) -> Self {
             value.clone()
         }
@@ -8065,9 +7301,7 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Paginated collection of LogResource.
@@ -8096,7 +7330,8 @@ pub mod types {
         pub type_: LogManagementLogLogResourcePaginatedCollectionResourceType,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResource>
-    for LogManagementLogLogResourcePaginatedCollectionResource {
+        for LogManagementLogLogResourcePaginatedCollectionResource
+    {
         fn from(value: &LogManagementLogLogResourcePaginatedCollectionResource) -> Self {
             value.clone()
         }
@@ -8126,10 +7361,9 @@ pub mod types {
         pub updated_at: chrono::DateTime<chrono::offset::Utc>,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItem>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItem {
-        fn from(
-            value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItem,
-        ) -> Self {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItem
+    {
+        fn from(value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItem) -> Self {
             value.clone()
         }
     }
@@ -8142,7 +7376,8 @@ pub mod types {
         pub value: LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevel>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevel {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevel
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevel,
         ) -> Self {
@@ -8150,18 +7385,7 @@ pub mod types {
         }
     }
     ///Name of the log level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
         Debug,
         Info,
@@ -8173,15 +7397,15 @@ pub mod types {
         Emergency,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+    impl ToString for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
         fn to_string(&self) -> String {
             match *self {
                 Self::Debug => "Debug".to_string(),
@@ -8196,7 +7420,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8213,21 +7438,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -8235,18 +7463,14 @@ pub mod types {
     }
     ///Value of the log level.
     #[derive(Clone, Debug, Serialize)]
-    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue(
-        i64,
-    );
-    impl std::ops::Deref
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue {
+    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue(i64);
+    impl std::ops::Deref for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue {
         type Target = i64;
         fn deref(&self) -> &i64 {
             &self.0
         }
     }
-    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue>
-    for i64 {
+    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue> for i64 {
         fn from(
             value: LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue,
         ) -> Self {
@@ -8254,7 +7478,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue,
         ) -> Self {
@@ -8262,11 +7487,14 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<i64>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue
+    {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -8275,29 +7503,26 @@ pub mod types {
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemLevelValue
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The namespace of the log.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace(String);
+    impl std::ops::Deref for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace>
-    for String {
+    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace> for String {
         fn from(
             value: LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace,
         ) -> Self {
@@ -8305,7 +7530,8 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace,
         ) -> Self {
@@ -8313,7 +7539,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -8323,53 +7550,51 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemNamespace
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///The template for formatting the message.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
-    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate(
-        String,
-    );
-    impl std::ops::Deref
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+    pub struct LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate(String);
+    impl std::ops::Deref for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate>
-    for String {
+    impl From<LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate> for String {
         fn from(
             value: LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate,
         ) -> Self {
@@ -8377,15 +7602,15 @@ pub mod types {
         }
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate,
         ) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+    impl std::str::FromStr for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -8395,74 +7620,64 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemTemplate
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
         #[serde(rename = "log")]
         Log,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+    impl ToString for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
         fn to_string(&self) -> String {
             match *self {
                 Self::Log => "log".to_string(),
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+    impl std::str::FromStr for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8472,48 +7687,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType {
+        for LogManagementLogLogResourcePaginatedCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogResourcePaginatedCollectionResourceType {
         #[serde(rename = "paginated_collection")]
         PaginatedCollection,
     }
     impl From<&LogManagementLogLogResourcePaginatedCollectionResourceType>
-    for LogManagementLogLogResourcePaginatedCollectionResourceType {
-        fn from(
-            value: &LogManagementLogLogResourcePaginatedCollectionResourceType,
-        ) -> Self {
+        for LogManagementLogLogResourcePaginatedCollectionResourceType
+    {
+        fn from(value: &LogManagementLogLogResourcePaginatedCollectionResourceType) -> Self {
             value.clone()
         }
     }
@@ -8524,8 +7730,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogLogResourcePaginatedCollectionResourceType {
+    impl std::str::FromStr for LogManagementLogLogResourcePaginatedCollectionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8534,22 +7739,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogLogResourcePaginatedCollectionResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogLogResourcePaginatedCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceType {
+    impl std::convert::TryFrom<&String> for LogManagementLogLogResourcePaginatedCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogLogResourcePaginatedCollectionResourceType {
+    impl std::convert::TryFrom<String> for LogManagementLogLogResourcePaginatedCollectionResourceType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -8569,8 +7771,7 @@ pub mod types {
             value.0
         }
     }
-    impl From<&LogManagementLogLogResourceTemplate>
-    for LogManagementLogLogResourceTemplate {
+    impl From<&LogManagementLogLogResourceTemplate> for LogManagementLogLogResourceTemplate {
         fn from(value: &LogManagementLogLogResourceTemplate) -> Self {
             value.clone()
         }
@@ -8609,24 +7810,11 @@ pub mod types {
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogResourceType {
         #[serde(rename = "log")]
         Log,
@@ -8671,18 +7859,7 @@ pub mod types {
         }
     }
     ///The frequency for log statistics, specifying how the data should be aggregated.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsFrequency {
         #[serde(rename = "yearly")]
         Yearly,
@@ -8697,8 +7874,7 @@ pub mod types {
         #[serde(rename = "hourly")]
         Hourly,
     }
-    impl From<&LogManagementLogStatisticsFrequency>
-    for LogManagementLogStatisticsFrequency {
+    impl From<&LogManagementLogStatisticsFrequency> for LogManagementLogStatisticsFrequency {
         fn from(value: &LogManagementLogStatisticsFrequency) -> Self {
             value.clone()
         }
@@ -8759,10 +7935,9 @@ pub mod types {
         pub type_: LogManagementLogStatisticsLogEntryFrequencyCountResourceType,
     }
     impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResource>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResource {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntryFrequencyCountResource,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResource
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntryFrequencyCountResource) -> Self {
             value.clone()
         }
     }
@@ -8777,9 +7952,9 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResource,
-    > for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResource {
+    impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResource>
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResource
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResource,
         ) -> Self {
@@ -8795,12 +7970,12 @@ pub mod types {
         pub date: chrono::DateTime<chrono::offset::Utc>,
         ///Type identifier for the resource.
         #[serde(rename = "type")]
-        pub type_: LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType,
+        pub type_:
+            LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItem,
-    >
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItem {
+    impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItem>
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItem,
         ) -> Self {
@@ -8808,18 +7983,7 @@ pub mod types {
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_entry_frequency_count")]
         LogEntryFrequencyCount,
@@ -8835,7 +7999,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntryFrequencyCount => "log_entry_frequency_count".to_string(),
@@ -8843,7 +8008,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8853,55 +8019,45 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType,
-    >
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+    impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType>
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+    impl ToString for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
                 Self::SimpleCollection => "simple_collection".to_string(),
@@ -8909,7 +8065,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8919,48 +8076,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
         #[serde(rename = "log_entry_frequency_count")]
         LogEntryFrequencyCount,
     }
     impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResourceType>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntryFrequencyCountResourceType,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceType
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntryFrequencyCountResourceType) -> Self {
             value.clone()
         }
     }
@@ -8971,8 +8119,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
+    impl std::str::FromStr for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -8981,22 +8128,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryFrequencyCountResourceType {
+        for LogManagementLogStatisticsLogEntryFrequencyCountResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -9015,10 +8163,9 @@ pub mod types {
         pub type_: LogManagementLogStatisticsLogEntrySourceFrequencyResourceType,
     }
     impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResource>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResource {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntrySourceFrequencyResource,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResource
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntrySourceFrequencyResource) -> Self {
             value.clone()
         }
     }
@@ -9033,9 +8180,9 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResource,
-    > for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResource {
+    impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResource>
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResource
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResource,
         ) -> Self {
@@ -9054,10 +8201,9 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItem,
-    >
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItem {
+    impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItem>
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItem,
         ) -> Self {
@@ -9143,18 +8289,7 @@ pub mod types {
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_entry_source_frequency")]
         LogEntrySourceFrequency,
@@ -9170,7 +8305,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntrySourceFrequency => "log_entry_source_frequency".to_string(),
@@ -9178,7 +8314,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9188,55 +8325,45 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType,
-    >
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+    impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType>
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+    impl ToString for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
                 Self::SimpleCollection => "simple_collection".to_string(),
@@ -9244,7 +8371,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9254,21 +8382,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -9277,31 +8408,25 @@ pub mod types {
     ///Source associated with the frequency count.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource(String);
-    impl std::ops::Deref
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+    impl std::ops::Deref for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource>
-    for String {
-        fn from(
-            value: LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource,
-        ) -> Self {
+    impl From<LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource> for String {
+        fn from(value: LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource) -> Self {
             value.0
         }
     }
     impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+    impl std::str::FromStr for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() > 128usize {
@@ -9314,61 +8439,51 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceSource
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
         #[serde(rename = "log_entry_source_frequency")]
         LogEntrySourceFrequency,
     }
     impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceType>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceType,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntrySourceFrequencyResourceType) -> Self {
             value.clone()
         }
     }
@@ -9379,8 +8494,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
+    impl std::str::FromStr for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9389,22 +8503,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType {
+        for LogManagementLogStatisticsLogEntrySourceFrequencyResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -9422,10 +8537,9 @@ pub mod types {
         pub type_: LogManagementLogStatisticsLogEntryTagDistributionResourceType,
     }
     impl From<&LogManagementLogStatisticsLogEntryTagDistributionResource>
-    for LogManagementLogStatisticsLogEntryTagDistributionResource {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntryTagDistributionResource,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntryTagDistributionResource
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntryTagDistributionResource) -> Self {
             value.clone()
         }
     }
@@ -9440,9 +8554,9 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResource,
-    > for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResource {
+    impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResource>
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResource
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResource,
         ) -> Self {
@@ -9460,10 +8574,9 @@ pub mod types {
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItem,
-    >
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItem {
+    impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItem>
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItem,
         ) -> Self {
@@ -9476,15 +8589,18 @@ pub mod types {
         String,
     );
     impl std::ops::Deref
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
-    impl From<
-        LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag,
-    > for String {
+    impl
+        From<
+            LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag,
+        > for String
+    {
         fn from(
             value: LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag,
         ) -> Self {
@@ -9502,7 +8618,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -9512,52 +8629,43 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemTag
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_entry_tag_distribution")]
         LogEntryTagDistribution,
@@ -9573,7 +8681,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogEntryTagDistribution => "log_entry_tag_distribution".to_string(),
@@ -9581,7 +8690,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9591,55 +8701,45 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
-    impl From<
-        &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType,
-    >
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+    impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType>
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+    impl ToString for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
                 Self::SimpleCollection => "simple_collection".to_string(),
@@ -9647,7 +8747,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9657,21 +8758,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -9680,30 +8784,25 @@ pub mod types {
     ///Tag associated with the distribution.
     #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub struct LogManagementLogStatisticsLogEntryTagDistributionResourceTag(String);
-    impl std::ops::Deref
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+    impl std::ops::Deref for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
         type Target = String;
         fn deref(&self) -> &String {
             &self.0
         }
     }
     impl From<LogManagementLogStatisticsLogEntryTagDistributionResourceTag> for String {
-        fn from(
-            value: LogManagementLogStatisticsLogEntryTagDistributionResourceTag,
-        ) -> Self {
+        fn from(value: LogManagementLogStatisticsLogEntryTagDistributionResourceTag) -> Self {
             value.0
         }
     }
     impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceTag>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntryTagDistributionResourceTag,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceTag
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntryTagDistributionResourceTag) -> Self {
             value.clone()
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+    impl std::str::FromStr for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             if value.len() < 1usize {
@@ -9712,62 +8811,48 @@ pub mod types {
             Ok(Self(value.to_string()))
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceTag
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceTag
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl<'de> serde::Deserialize<'de>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
+    impl<'de> serde::Deserialize<'de> for LogManagementLogStatisticsLogEntryTagDistributionResourceTag {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             String::deserialize(deserializer)?
                 .parse()
-                .map_err(|e: &'static str| {
-                    <D::Error as serde::de::Error>::custom(e.to_string())
-                })
+                .map_err(|e: &'static str| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryTagDistributionResourceType {
         #[serde(rename = "log_entry_tag_distribution")]
         LogEntryTagDistribution,
     }
     impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceType>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
-        fn from(
-            value: &LogManagementLogStatisticsLogEntryTagDistributionResourceType,
-        ) -> Self {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceType
+    {
+        fn from(value: &LogManagementLogStatisticsLogEntryTagDistributionResourceType) -> Self {
             value.clone()
         }
     }
@@ -9778,8 +8863,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
+    impl std::str::FromStr for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9788,22 +8872,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogEntryTagDistributionResourceType {
+        for LogManagementLogStatisticsLogEntryTagDistributionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -9821,7 +8906,8 @@ pub mod types {
         pub type_: LogManagementLogStatisticsLogFrequencyCountResourceType,
     }
     impl From<&LogManagementLogStatisticsLogFrequencyCountResource>
-    for LogManagementLogStatisticsLogFrequencyCountResource {
+        for LogManagementLogStatisticsLogFrequencyCountResource
+    {
         fn from(value: &LogManagementLogStatisticsLogFrequencyCountResource) -> Self {
             value.clone()
         }
@@ -9830,15 +8916,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementLogStatisticsLogFrequencyCountResourceCollectionResource {
         ///Array of LogFrequencyCountResource.
-        pub items: Vec<
-            LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem,
-        >,
+        pub items:
+            Vec<LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType,
     }
     impl From<&LogManagementLogStatisticsLogFrequencyCountResourceCollectionResource>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResource {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResource
+    {
         fn from(
             value: &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResource,
         ) -> Self {
@@ -9854,12 +8940,12 @@ pub mod types {
         pub date: chrono::DateTime<chrono::offset::Utc>,
         ///Type identifier for the resource.
         #[serde(rename = "type")]
-        pub type_: LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType,
+        pub type_:
+            LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem,
-    >
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem {
+    impl From<&LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem>
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItem,
         ) -> Self {
@@ -9867,26 +8953,14 @@ pub mod types {
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_frequency_count")]
         LogFrequencyCount,
     }
-    impl From<
-        &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType,
-    >
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+    impl From<&LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType>
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType,
         ) -> Self {
@@ -9894,7 +8968,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogFrequencyCount => "log_frequency_count".to_string(),
@@ -9902,7 +8977,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9912,53 +8988,45 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
     impl From<&LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+    impl ToString for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
                 Self::SimpleCollection => "simple_collection".to_string(),
@@ -9966,7 +9034,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -9976,48 +9045,39 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogFrequencyCountResourceType {
         #[serde(rename = "log_frequency_count")]
         LogFrequencyCount,
     }
     impl From<&LogManagementLogStatisticsLogFrequencyCountResourceType>
-    for LogManagementLogStatisticsLogFrequencyCountResourceType {
-        fn from(
-            value: &LogManagementLogStatisticsLogFrequencyCountResourceType,
-        ) -> Self {
+        for LogManagementLogStatisticsLogFrequencyCountResourceType
+    {
+        fn from(value: &LogManagementLogStatisticsLogFrequencyCountResourceType) -> Self {
             value.clone()
         }
     }
@@ -10037,22 +9097,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogFrequencyCountResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogFrequencyCountResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceType {
+    impl std::convert::TryFrom<&String> for LogManagementLogStatisticsLogFrequencyCountResourceType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogFrequencyCountResourceType {
+    impl std::convert::TryFrom<String> for LogManagementLogStatisticsLogFrequencyCountResourceType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -10070,7 +9127,8 @@ pub mod types {
         pub type_: LogManagementLogStatisticsLogLevelStatisticsResourceType,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResource>
-    for LogManagementLogStatisticsLogLevelStatisticsResource {
+        for LogManagementLogStatisticsLogLevelStatisticsResource
+    {
         fn from(value: &LogManagementLogStatisticsLogLevelStatisticsResource) -> Self {
             value.clone()
         }
@@ -10079,15 +9137,15 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResource {
         ///Array of LogLevelStatisticsResource.
-        pub items: Vec<
-            LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem,
-        >,
+        pub items:
+            Vec<LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem>,
         ///Type identifier for the collection.
         #[serde(rename = "type")]
         pub type_: LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResource>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResource {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResource
+    {
         fn from(
             value: &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResource,
         ) -> Self {
@@ -10099,16 +9157,17 @@ pub mod types {
     pub struct LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem {
         ///Count of logs for the specified level.
         pub count: std::num::NonZeroU64,
-        pub level: LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel,
+        pub level:
+            LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel,
         pub percentage: f64,
         ///Type identifier for the resource.
         #[serde(rename = "type")]
-        pub type_: LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType,
+        pub type_:
+            LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType,
     }
-    impl From<
-        &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem,
-    >
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem {
+    impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem>
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem
+    {
         fn from(
             value: &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItem,
         ) -> Self {
@@ -10123,10 +9182,9 @@ pub mod types {
         ///Value of the level.
         pub value: LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelValue,
     }
-    impl From<
-        &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel,
-    >
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel {
+    impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel>
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel
+    {
         fn from(
             value: &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevel,
         ) -> Self {
@@ -10134,18 +9192,7 @@ pub mod types {
         }
     }
     ///Name of the level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
         Debug,
         Info,
@@ -10167,7 +9214,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::Debug => "Debug".to_string(),
@@ -10182,7 +9230,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -10199,21 +9248,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemLevelName
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -10274,26 +9326,14 @@ pub mod types {
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
         #[serde(rename = "log_level_statistics")]
         LogLevelStatistics,
     }
-    impl From<
-        &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType,
-    >
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+    impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType>
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType,
         ) -> Self {
@@ -10301,7 +9341,8 @@ pub mod types {
         }
     }
     impl ToString
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         fn to_string(&self) -> String {
             match *self {
                 Self::LogLevelStatistics => "log_level_statistics".to_string(),
@@ -10309,7 +9350,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -10319,54 +9361,45 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceItemsItemType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     ///Type identifier for the collection.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
         #[serde(rename = "simple_collection")]
         SimpleCollection,
     }
-    impl From<
-        &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType,
-    > for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+    impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType>
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
+    {
         fn from(
             value: &LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType,
         ) -> Self {
             value.clone()
         }
     }
-    impl ToString
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+    impl ToString for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
                 Self::SimpleCollection => "simple_collection".to_string(),
@@ -10374,7 +9407,8 @@ pub mod types {
         }
     }
     impl std::str::FromStr
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
+    {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -10384,21 +9418,24 @@ pub mod types {
         }
     }
     impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -10413,26 +9450,14 @@ pub mod types {
         pub value: LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceLevel>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevel {
-        fn from(
-            value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevel,
-        ) -> Self {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevel
+    {
+        fn from(value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevel) -> Self {
             value.clone()
         }
     }
     ///Name of the level.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
         Debug,
         Info,
@@ -10444,10 +9469,9 @@ pub mod types {
         Emergency,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceLevelName>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
-        fn from(
-            value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevelName,
-        ) -> Self {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName
+    {
+        fn from(value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevelName) -> Self {
             value.clone()
         }
     }
@@ -10465,8 +9489,7 @@ pub mod types {
             }
         }
     }
-    impl std::str::FromStr
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
+    impl std::str::FromStr for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
@@ -10482,22 +9505,23 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName
+    {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
     impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevelName
+    {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -10506,34 +9530,31 @@ pub mod types {
     ///Value of the level.
     #[derive(Clone, Debug, Serialize)]
     pub struct LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue(i64);
-    impl std::ops::Deref
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
+    impl std::ops::Deref for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
         type Target = i64;
         fn deref(&self) -> &i64 {
             &self.0
         }
     }
     impl From<LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue> for i64 {
-        fn from(
-            value: LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue,
-        ) -> Self {
+        fn from(value: LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue) -> Self {
             value.0
         }
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
-        fn from(
-            value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue,
-        ) -> Self {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue
+    {
+        fn from(value: &LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue) -> Self {
             value.clone()
         }
     }
-    impl std::convert::TryFrom<i64>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
+    impl std::convert::TryFrom<i64> for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
         type Error = &'static str;
         fn try_from(value: i64) -> Result<Self, &'static str> {
-            if ![100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64]
-                .contains(&value)
+            if ![
+                100_i64, 200_i64, 250_i64, 300_i64, 400_i64, 500_i64, 550_i64, 600_i64,
+            ]
+            .contains(&value)
             {
                 Err("invalid value")
             } else {
@@ -10542,37 +9563,26 @@ pub mod types {
         }
     }
     impl<'de> serde::Deserialize<'de>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceLevelValue
+    {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
             D: serde::Deserializer<'de>,
         {
             Self::try_from(<i64>::deserialize(deserializer)?)
-                .map_err(|e| { <D::Error as serde::de::Error>::custom(e.to_string()) })
+                .map_err(|e| <D::Error as serde::de::Error>::custom(e.to_string()))
         }
     }
     ///Type identifier for the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceType {
         #[serde(rename = "log_level_statistics")]
         LogLevelStatistics,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceType>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceType {
-        fn from(
-            value: &LogManagementLogStatisticsLogLevelStatisticsResourceType,
-        ) -> Self {
+        for LogManagementLogStatisticsLogLevelStatisticsResourceType
+    {
+        fn from(value: &LogManagementLogStatisticsLogLevelStatisticsResourceType) -> Self {
             value.clone()
         }
     }
@@ -10592,22 +9602,19 @@ pub mod types {
             }
         }
     }
-    impl std::convert::TryFrom<&str>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceType {
+    impl std::convert::TryFrom<&str> for LogManagementLogStatisticsLogLevelStatisticsResourceType {
         type Error = &'static str;
         fn try_from(value: &str) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<&String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceType {
+    impl std::convert::TryFrom<&String> for LogManagementLogStatisticsLogLevelStatisticsResourceType {
         type Error = &'static str;
         fn try_from(value: &String) -> Result<Self, &'static str> {
             value.parse()
         }
     }
-    impl std::convert::TryFrom<String>
-    for LogManagementLogStatisticsLogLevelStatisticsResourceType {
+    impl std::convert::TryFrom<String> for LogManagementLogStatisticsLogLevelStatisticsResourceType {
         type Error = &'static str;
         fn try_from(value: String) -> Result<Self, &'static str> {
             value.parse()
@@ -10631,18 +9638,7 @@ pub mod types {
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum PingResponseType {
         #[serde(rename = "ping")]
         Ping,
@@ -10914,18 +9910,7 @@ pub mod types {
         }
     }
     ///Type of the resource.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        Deserialize,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-        Serialize
-    )]
+    #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum SharedPingResourceType {
         #[serde(rename = "ping")]
         Ping,
@@ -10990,7 +9975,9 @@ impl Client {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new().connect_timeout(dur).timeout(dur)
+            reqwest::ClientBuilder::new()
+                .connect_timeout(dur)
+                .timeout(dur)
         };
         #[cfg(target_arch = "wasm32")]
         let client = reqwest::ClientBuilder::new();
@@ -11027,14 +10014,12 @@ impl Client {
 impl Client {
     /**Retrieve the ping status
 
-This endpoint is used to check the availability of the service. It returns a random quote from Hannibal, The Carthaginian General, along with the current time.
+    This endpoint is used to check the availability of the service. It returns a random quote from Hannibal, The Carthaginian General, along with the current time.
 
-Sends a `GET` request to `/ping`
+    Sends a `GET` request to `/ping`
 
-*/
-    pub async fn ping<'a>(
-        &'a self,
-    ) -> Result<ResponseValue<types::PingResponse>, Error<()>> {
+    */
+    pub async fn ping<'a>(&'a self) -> Result<ResponseValue<types::PingResponse>, Error<()>> {
         let url = format!("{}/ping", self.baseurl,);
         let request = self
             .client
@@ -11053,11 +10038,11 @@ Sends a `GET` request to `/ping`
     }
     /**Collect Multiple Logs
 
-Collect multiple log entries, for multiple logs.
+    Collect multiple log entries, for multiple logs.
 
-Sends a `POST` request to `/log-management/collect`
+    Sends a `POST` request to `/log-management/collect`
 
-*/
+    */
     pub async fn log_management_collect<'a>(
         &'a self,
         body: &'a types::LogManagementCollectBody,
@@ -11074,20 +10059,20 @@ Sends a `POST` request to `/log-management/collect`
     }
     /**Get Log Collection
 
-Retrieve a collection of logs.
+    Retrieve a collection of logs.
 
-Sends a `GET` request to `/log-management/log`
+    Sends a `GET` request to `/log-management/log`
 
-Arguments:
-- `contains`
-- `from`
-- `items_per_page`: The number of items per page for pagination. Defaults to 20, with a maximum of 2000.
-- `levels`
-- `order`
-- `page`: The page number for pagination. Defaults to 1.
-- `sort_by`
-- `to`
-*/
+    Arguments:
+    - `contains`
+    - `from`
+    - `items_per_page`: The number of items per page for pagination. Defaults to 20, with a maximum of 2000.
+    - `levels`
+    - `order`
+    - `page`: The page number for pagination. Defaults to 1.
+    - `sort_by`
+    - `to`
+    */
     pub async fn log_management_get_log_collection<'a>(
         &'a self,
         contains: Option<&'a str>,
@@ -11150,11 +10135,11 @@ Arguments:
     }
     /**Create Log
 
-Create a new log.
+    Create a new log.
 
-Sends a `POST` request to `/log-management/log`
+    Sends a `POST` request to `/log-management/log`
 
-*/
+    */
     pub async fn log_management_create_log<'a>(
         &'a self,
         body: &'a types::LogManagementCreateLogBody,
@@ -11179,18 +10164,19 @@ Sends a `POST` request to `/log-management/log`
     }
     /**Get Log
 
-Get a log by its identity.
+    Get a log by its identity.
 
-Sends a `GET` request to `/log-management/log/{identity}`
+    Sends a `GET` request to `/log-management/log/{identity}`
 
-*/
+    */
     pub async fn log_management_get_log<'a>(
         &'a self,
         identity: &'a uuid::Uuid,
     ) -> Result<ResponseValue<types::LogManagementGetLogResponse>, Error<()>> {
         let url = format!(
-            "{}/log-management/log/{}", self.baseurl, encode_path(& identity
-            .to_string()),
+            "{}/log-management/log/{}",
+            self.baseurl,
+            encode_path(&identity.to_string()),
         );
         let request = self
             .client
@@ -11210,18 +10196,19 @@ Sends a `GET` request to `/log-management/log/{identity}`
     }
     /**Delete Log
 
-Delete a log by identity.
+    Delete a log by identity.
 
-Sends a `DELETE` request to `/log-management/log/{identity}`
+    Sends a `DELETE` request to `/log-management/log/{identity}`
 
-*/
+    */
     pub async fn log_management_delete_log<'a>(
         &'a self,
         identity: &'a uuid::Uuid,
     ) -> Result<ResponseValue<()>, Error<()>> {
         let url = format!(
-            "{}/log-management/log/{}", self.baseurl, encode_path(& identity
-            .to_string()),
+            "{}/log-management/log/{}",
+            self.baseurl,
+            encode_path(&identity.to_string()),
         );
         let request = self.client.delete(url).build()?;
         let result = self.client.execute(request).await;
@@ -11234,17 +10221,15 @@ Sends a `DELETE` request to `/log-management/log/{identity}`
     }
     /**Get Log Namespace Collection
 
-Retrieve a collection of log namespaces.
+    Retrieve a collection of log namespaces.
 
-Sends a `GET` request to `/log-management/log/namespace`
+    Sends a `GET` request to `/log-management/log/namespace`
 
-*/
+    */
     pub async fn log_management_get_log_namespace_collection<'a>(
         &'a self,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogNamespaceCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogNamespaceCollectionResponse>, Error<()>>
+    {
         let url = format!("{}/log-management/log/namespace", self.baseurl,);
         let request = self
             .client
@@ -11263,19 +10248,19 @@ Sends a `GET` request to `/log-management/log/namespace`
     }
     /**Get Log Entry Collection
 
-Retrieve a collection of log entries.
+    Retrieve a collection of log entries.
 
-Sends a `GET` request to `/log-management/log/entry`
+    Sends a `GET` request to `/log-management/log/entry`
 
-Arguments:
-- `after`
-- `before`
-- `items_per_page`: The number of items per page for pagination. Defaults to 20, with a maximum of 2000.
-- `log_identity`
-- `order`
-- `page`: The page number for pagination. Defaults to 1.
-- `source`
-*/
+    Arguments:
+    - `after`
+    - `before`
+    - `items_per_page`: The number of items per page for pagination. Defaults to 20, with a maximum of 2000.
+    - `log_identity`
+    - `order`
+    - `page`: The page number for pagination. Defaults to 1.
+    - `source`
+    */
     pub async fn log_management_get_log_entry_collection<'a>(
         &'a self,
         after: Option<&'a chrono::DateTime<chrono::offset::Utc>>,
@@ -11285,10 +10270,7 @@ Arguments:
         order: Option<types::LogManagementGetLogEntryCollectionOrder>,
         page: Option<std::num::NonZeroU64>,
         source: Option<&'a str>,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogEntryCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogEntryCollectionResponse>, Error<()>> {
         let url = format!("{}/log-management/log/entry", self.baseurl,);
         let mut query = Vec::with_capacity(7usize);
         if let Some(v) = &after {
@@ -11331,11 +10313,11 @@ Arguments:
     }
     /**Create Log Entry
 
-Create a new log entry.
+    Create a new log entry.
 
-Sends a `POST` request to `/log-management/log/entry`
+    Sends a `POST` request to `/log-management/log/entry`
 
-*/
+    */
     pub async fn log_management_create_log_entry<'a>(
         &'a self,
         body: &'a types::LogManagementCreateLogEntryBody,
@@ -11361,17 +10343,15 @@ Sends a `POST` request to `/log-management/log/entry`
     }
     /**Get Log Entry Tag Collection
 
-Retrieve a collection of log entry tags.
+    Retrieve a collection of log entry tags.
 
-Sends a `GET` request to `/log-management/log/entry/tag`
+    Sends a `GET` request to `/log-management/log/entry/tag`
 
-*/
+    */
     pub async fn log_management_get_log_entry_tag_collection<'a>(
         &'a self,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogEntryTagCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogEntryTagCollectionResponse>, Error<()>>
+    {
         let url = format!("{}/log-management/log/entry/tag", self.baseurl,);
         let request = self
             .client
@@ -11390,17 +10370,15 @@ Sends a `GET` request to `/log-management/log/entry/tag`
     }
     /**Get Log Entry Source Collection
 
-Retrieve a collection of log entry sources.
+    Retrieve a collection of log entry sources.
 
-Sends a `GET` request to `/log-management/log/entry/source`
+    Sends a `GET` request to `/log-management/log/entry/source`
 
-*/
+    */
     pub async fn log_management_get_log_entry_source_collection<'a>(
         &'a self,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogEntrySourceCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogEntrySourceCollectionResponse>, Error<()>>
+    {
         let url = format!("{}/log-management/log/entry/source", self.baseurl,);
         let request = self
             .client
@@ -11419,18 +10397,19 @@ Sends a `GET` request to `/log-management/log/entry/source`
     }
     /**Get Log Entry
 
-Get a log entry by its identity.
+    Get a log entry by its identity.
 
-Sends a `GET` request to `/log-management/log/entry/{identity}`
+    Sends a `GET` request to `/log-management/log/entry/{identity}`
 
-*/
+    */
     pub async fn log_management_get_log_entry<'a>(
         &'a self,
         identity: &'a uuid::Uuid,
     ) -> Result<ResponseValue<types::LogManagementGetLogEntryResponse>, Error<()>> {
         let url = format!(
-            "{}/log-management/log/entry/{}", self.baseurl, encode_path(& identity
-            .to_string()),
+            "{}/log-management/log/entry/{}",
+            self.baseurl,
+            encode_path(&identity.to_string()),
         );
         let request = self
             .client
@@ -11450,18 +10429,19 @@ Sends a `GET` request to `/log-management/log/entry/{identity}`
     }
     /**Delete Log Entry
 
-Delete a log entry by identity.
+    Delete a log entry by identity.
 
-Sends a `DELETE` request to `/log-management/log/entry/{identity}`
+    Sends a `DELETE` request to `/log-management/log/entry/{identity}`
 
-*/
+    */
     pub async fn log_management_delete_log_entry<'a>(
         &'a self,
         identity: &'a uuid::Uuid,
     ) -> Result<ResponseValue<()>, Error<()>> {
         let url = format!(
-            "{}/log-management/log/entry/{}", self.baseurl, encode_path(& identity
-            .to_string()),
+            "{}/log-management/log/entry/{}",
+            self.baseurl,
+            encode_path(&identity.to_string()),
         );
         let request = self.client.delete(url).build()?;
         let result = self.client.execute(request).await;
@@ -11474,11 +10454,11 @@ Sends a `DELETE` request to `/log-management/log/entry/{identity}`
     }
     /**Collect Log Entries
 
-Collect log entries from a log.
+    Collect log entries from a log.
 
-Sends a `POST` request to `/log-management/log/collect`
+    Sends a `POST` request to `/log-management/log/collect`
 
-*/
+    */
     pub async fn log_management_collect_log<'a>(
         &'a self,
         body: &'a types::LogManagementCollectLogBody,
@@ -11495,11 +10475,11 @@ Sends a `POST` request to `/log-management/log/collect`
     }
     /**Get Log Entry Frequency Count
 
-Get the frequency count of log entries.
+    Get the frequency count of log entries.
 
-Sends a `GET` request to `/log-management/log/statistic/entry-frequency-count/{frequency}`
+    Sends a `GET` request to `/log-management/log/statistic/entry-frequency-count/{frequency}`
 
-*/
+    */
     pub async fn log_management_get_log_entry_frequency_count_collection<'a>(
         &'a self,
         frequency: types::LogManagementGetLogEntryFrequencyCountCollectionFrequency,
@@ -11508,8 +10488,9 @@ Sends a `GET` request to `/log-management/log/statistic/entry-frequency-count/{f
         Error<()>,
     > {
         let url = format!(
-            "{}/log-management/log/statistic/entry-frequency-count/{}", self.baseurl,
-            encode_path(& frequency.to_string()),
+            "{}/log-management/log/statistic/entry-frequency-count/{}",
+            self.baseurl,
+            encode_path(&frequency.to_string()),
         );
         let request = self
             .client
@@ -11528,11 +10509,11 @@ Sends a `GET` request to `/log-management/log/statistic/entry-frequency-count/{f
     }
     /**Get Log Entry Source Frequency
 
-Get the frequency count of log entry sources.
+    Get the frequency count of log entry sources.
 
-Sends a `GET` request to `/log-management/log/statistic/entry-source-frequency`
+    Sends a `GET` request to `/log-management/log/statistic/entry-source-frequency`
 
-*/
+    */
     pub async fn log_management_get_log_entry_source_frequency_collection<'a>(
         &'a self,
     ) -> Result<
@@ -11540,7 +10521,8 @@ Sends a `GET` request to `/log-management/log/statistic/entry-source-frequency`
         Error<()>,
     > {
         let url = format!(
-            "{}/log-management/log/statistic/entry-source-frequency", self.baseurl,
+            "{}/log-management/log/statistic/entry-source-frequency",
+            self.baseurl,
         );
         let request = self
             .client
@@ -11559,11 +10541,11 @@ Sends a `GET` request to `/log-management/log/statistic/entry-source-frequency`
     }
     /**Get Log Entry Tag Distribution
 
-Get the distribution of log entry tags.
+    Get the distribution of log entry tags.
 
-Sends a `GET` request to `/log-management/log/statistic/entry-tag-distribution`
+    Sends a `GET` request to `/log-management/log/statistic/entry-tag-distribution`
 
-*/
+    */
     pub async fn log_management_get_log_entry_tag_distribution_collection<'a>(
         &'a self,
     ) -> Result<
@@ -11571,7 +10553,8 @@ Sends a `GET` request to `/log-management/log/statistic/entry-tag-distribution`
         Error<()>,
     > {
         let url = format!(
-            "{}/log-management/log/statistic/entry-tag-distribution", self.baseurl,
+            "{}/log-management/log/statistic/entry-tag-distribution",
+            self.baseurl,
         );
         let request = self
             .client
@@ -11590,21 +10573,20 @@ Sends a `GET` request to `/log-management/log/statistic/entry-tag-distribution`
     }
     /**Get Log Frequency Count
 
-Get the frequency count of logs.
+    Get the frequency count of logs.
 
-Sends a `GET` request to `/log-management/log/statistic/frequency-count/{frequency}`
+    Sends a `GET` request to `/log-management/log/statistic/frequency-count/{frequency}`
 
-*/
+    */
     pub async fn log_management_get_log_frequency_count_collection<'a>(
         &'a self,
         frequency: types::LogManagementGetLogFrequencyCountCollectionFrequency,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogFrequencyCountCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogFrequencyCountCollectionResponse>, Error<()>>
+    {
         let url = format!(
-            "{}/log-management/log/statistic/frequency-count/{}", self.baseurl,
-            encode_path(& frequency.to_string()),
+            "{}/log-management/log/statistic/frequency-count/{}",
+            self.baseurl,
+            encode_path(&frequency.to_string()),
         );
         let request = self
             .client
@@ -11623,19 +10605,18 @@ Sends a `GET` request to `/log-management/log/statistic/frequency-count/{frequen
     }
     /**Get Log Level Statistics
 
-Get the statistics of log levels.
+    Get the statistics of log levels.
 
-Sends a `GET` request to `/log-management/log/statistic/level-statistics`
+    Sends a `GET` request to `/log-management/log/statistic/level-statistics`
 
-*/
+    */
     pub async fn log_management_get_log_level_statistics_collection<'a>(
         &'a self,
-    ) -> Result<
-        ResponseValue<types::LogManagementGetLogLevelStatisticsCollectionResponse>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::LogManagementGetLogLevelStatisticsCollectionResponse>, Error<()>>
+    {
         let url = format!(
-            "{}/log-management/log/statistic/level-statistics", self.baseurl,
+            "{}/log-management/log/statistic/level-statistics",
+            self.baseurl,
         );
         let request = self
             .client
