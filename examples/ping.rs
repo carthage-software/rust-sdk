@@ -14,7 +14,7 @@ async fn main() {
         Ok(resource) => {
             println!("Server is up and running!");
             println!("Server Time: {}", resource.time);
-            println!("Quote: {}", resource.quote.clone().unwrap_or_default());
+            println!("Quote: {}", resource.quote);
         }
         Err(e) => println!("error: {}", e),
     }
