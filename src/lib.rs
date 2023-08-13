@@ -2611,8 +2611,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryFrequencyCountCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogEntryFrequencyCountCollectionResponseType>
         for LogManagementGetLogEntryFrequencyCountCollectionResponseType
@@ -2624,7 +2624,7 @@ pub mod types {
     impl ToString for LogManagementGetLogEntryFrequencyCountCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -2632,7 +2632,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -2995,8 +2995,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogEntrySourceCollectionResponseType>
         for LogManagementGetLogEntrySourceCollectionResponseType
@@ -3008,7 +3008,7 @@ pub mod types {
     impl ToString for LogManagementGetLogEntrySourceCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -3016,7 +3016,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -3209,8 +3209,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogEntrySourceFrequencyCollectionResponseType>
         for LogManagementGetLogEntrySourceFrequencyCollectionResponseType
@@ -3222,7 +3222,7 @@ pub mod types {
     impl ToString for LogManagementGetLogEntrySourceFrequencyCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -3230,7 +3230,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -3397,8 +3397,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogEntryTagCollectionResponseType>
         for LogManagementGetLogEntryTagCollectionResponseType
@@ -3410,7 +3410,7 @@ pub mod types {
     impl ToString for LogManagementGetLogEntryTagCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -3418,7 +3418,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -3605,8 +3605,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogEntryTagDistributionCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogEntryTagDistributionCollectionResponseType>
         for LogManagementGetLogEntryTagDistributionCollectionResponseType
@@ -3618,7 +3618,7 @@ pub mod types {
     impl ToString for LogManagementGetLogEntryTagDistributionCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -3626,7 +3626,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -3810,8 +3810,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogFrequencyCountCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogFrequencyCountCollectionResponseType>
         for LogManagementGetLogFrequencyCountCollectionResponseType
@@ -3823,7 +3823,7 @@ pub mod types {
     impl ToString for LogManagementGetLogFrequencyCountCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -3831,7 +3831,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -4088,8 +4088,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogLevelStatisticsCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogLevelStatisticsCollectionResponseType>
         for LogManagementGetLogLevelStatisticsCollectionResponseType
@@ -4101,7 +4101,7 @@ pub mod types {
     impl ToString for LogManagementGetLogLevelStatisticsCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -4109,7 +4109,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -4282,8 +4282,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementGetLogNamespaceCollectionResponseType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementGetLogNamespaceCollectionResponseType>
         for LogManagementGetLogNamespaceCollectionResponseType
@@ -4295,7 +4295,7 @@ pub mod types {
     impl ToString for LogManagementGetLogNamespaceCollectionResponseType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -4303,7 +4303,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -6051,8 +6051,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntrySourceResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogLogEntrySourceResourceCollectionResourceType>
         for LogManagementLogLogEntrySourceResourceCollectionResourceType
@@ -6064,7 +6064,7 @@ pub mod types {
     impl ToString for LogManagementLogLogEntrySourceResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -6072,7 +6072,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -6374,8 +6374,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogEntryTagResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogLogEntryTagResourceCollectionResourceType>
         for LogManagementLogLogEntryTagResourceCollectionResourceType
@@ -6387,7 +6387,7 @@ pub mod types {
     impl ToString for LogManagementLogLogEntryTagResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -6395,7 +6395,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -6952,8 +6952,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogLogNamespaceResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogLogNamespaceResourceCollectionResourceType>
         for LogManagementLogLogNamespaceResourceCollectionResourceType
@@ -6965,7 +6965,7 @@ pub mod types {
     impl ToString for LogManagementLogLogNamespaceResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -6973,7 +6973,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -8045,8 +8045,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType>
         for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType
@@ -8060,7 +8060,7 @@ pub mod types {
     impl ToString for LogManagementLogStatisticsLogEntryFrequencyCountResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -8070,7 +8070,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -8351,8 +8351,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType>
         for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType
@@ -8366,7 +8366,7 @@ pub mod types {
     impl ToString for LogManagementLogStatisticsLogEntrySourceFrequencyResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -8376,7 +8376,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -8727,8 +8727,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType>
         for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType
@@ -8742,7 +8742,7 @@ pub mod types {
     impl ToString for LogManagementLogStatisticsLogEntryTagDistributionResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -8752,7 +8752,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -9014,8 +9014,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType>
         for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType
@@ -9029,7 +9029,7 @@ pub mod types {
     impl ToString for LogManagementLogStatisticsLogFrequencyCountResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -9039,7 +9039,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
@@ -9387,8 +9387,8 @@ pub mod types {
     ///Type identifier for the collection.
     #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
     pub enum LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
-        #[serde(rename = "simple_collection")]
-        SimpleCollection,
+        #[serde(rename = "collection")]
+        Collection,
     }
     impl From<&LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType>
         for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType
@@ -9402,7 +9402,7 @@ pub mod types {
     impl ToString for LogManagementLogStatisticsLogLevelStatisticsResourceCollectionResourceType {
         fn to_string(&self) -> String {
             match *self {
-                Self::SimpleCollection => "simple_collection".to_string(),
+                Self::Collection => "collection".to_string(),
             }
         }
     }
@@ -9412,7 +9412,7 @@ pub mod types {
         type Err = &'static str;
         fn from_str(value: &str) -> Result<Self, &'static str> {
             match value {
-                "simple_collection" => Ok(Self::SimpleCollection),
+                "collection" => Ok(Self::Collection),
                 _ => Err("invalid value"),
             }
         }
