@@ -9624,8 +9624,7 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct PingResponse {
         ///A random quote from Hannibal, The Carthaginian General.
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub quote: Option<String>,
+        pub quote: String,
         ///The date and time
         pub time: chrono::DateTime<chrono::offset::Utc>,
         ///Type of the resource.
@@ -9896,8 +9895,7 @@ pub mod types {
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct SharedPingResource {
         ///A random quote from Hannibal, The Carthaginian General.
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub quote: Option<String>,
+        pub quote: String,
         ///The date and time
         pub time: chrono::DateTime<chrono::offset::Utc>,
         ///Type of the resource.
