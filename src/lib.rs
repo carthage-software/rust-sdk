@@ -10159,6 +10159,7 @@ impl Client {
         match response.status().as_u16() {
             200u16 => ResponseValue::from_response(response).await,
             400u16 => Err(Error::ErrorResponse(ResponseValue::empty(response))),
+            409u16 => Err(Error::ErrorResponse(ResponseValue::empty(response))),
             _ => Err(Error::UnexpectedResponse(response)),
         }
     }
@@ -10341,60 +10342,6 @@ impl Client {
             _ => Err(Error::UnexpectedResponse(response)),
         }
     }
-    /**Get Log Entry Tag Collection
-
-    Retrieve a collection of log entry tags.
-
-    Sends a `GET` request to `/log-management/log/entry/tag`
-
-    */
-    pub async fn log_management_get_log_entry_tag_collection<'a>(
-        &'a self,
-    ) -> Result<ResponseValue<types::LogManagementGetLogEntryTagCollectionResponse>, Error<()>>
-    {
-        let url = format!("{}/log-management/log/entry/tag", self.baseurl,);
-        let request = self
-            .client
-            .get(url)
-            .header(
-                reqwest::header::ACCEPT,
-                reqwest::header::HeaderValue::from_static("application/json"),
-            )
-            .build()?;
-        let result = self.client.execute(request).await;
-        let response = result?;
-        match response.status().as_u16() {
-            200u16 => ResponseValue::from_response(response).await,
-            _ => Err(Error::UnexpectedResponse(response)),
-        }
-    }
-    /**Get Log Entry Source Collection
-
-    Retrieve a collection of log entry sources.
-
-    Sends a `GET` request to `/log-management/log/entry/source`
-
-    */
-    pub async fn log_management_get_log_entry_source_collection<'a>(
-        &'a self,
-    ) -> Result<ResponseValue<types::LogManagementGetLogEntrySourceCollectionResponse>, Error<()>>
-    {
-        let url = format!("{}/log-management/log/entry/source", self.baseurl,);
-        let request = self
-            .client
-            .get(url)
-            .header(
-                reqwest::header::ACCEPT,
-                reqwest::header::HeaderValue::from_static("application/json"),
-            )
-            .build()?;
-        let result = self.client.execute(request).await;
-        let response = result?;
-        match response.status().as_u16() {
-            200u16 => ResponseValue::from_response(response).await,
-            _ => Err(Error::UnexpectedResponse(response)),
-        }
-    }
     /**Get Log Entry
 
     Get a log entry by its identity.
@@ -10449,6 +10396,60 @@ impl Client {
         match response.status().as_u16() {
             204u16 => Ok(ResponseValue::empty(response)),
             404u16 => Err(Error::ErrorResponse(ResponseValue::empty(response))),
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+    /**Get Log Entry Tag Collection
+
+    Retrieve a collection of log entry tags.
+
+    Sends a `GET` request to `/log-management/log/entry/tag`
+
+    */
+    pub async fn log_management_get_log_entry_tag_collection<'a>(
+        &'a self,
+    ) -> Result<ResponseValue<types::LogManagementGetLogEntryTagCollectionResponse>, Error<()>>
+    {
+        let url = format!("{}/log-management/log/entry/tag", self.baseurl,);
+        let request = self
+            .client
+            .get(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+    /**Get Log Entry Source Collection
+
+    Retrieve a collection of log entry sources.
+
+    Sends a `GET` request to `/log-management/log/entry/source`
+
+    */
+    pub async fn log_management_get_log_entry_source_collection<'a>(
+        &'a self,
+    ) -> Result<ResponseValue<types::LogManagementGetLogEntrySourceCollectionResponse>, Error<()>>
+    {
+        let url = format!("{}/log-management/log/entry/source", self.baseurl,);
+        let request = self
+            .client
+            .get(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
             _ => Err(Error::UnexpectedResponse(response)),
         }
     }
